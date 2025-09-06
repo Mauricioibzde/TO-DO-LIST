@@ -1,0 +1,39 @@
+:root {
+    --status-yellow:#ff6000;
+    --status-green:#498143;
+    --status-red:#ff000c;
+    --gray-color:#292929;
+    --background-color:#0c0b0b;
+
+      --background-gradiente: linear-gradient(180deg, #292929 0%, rgba(10, 10, 10, 1) 100%);
+       --background-gradiente-js: linear-gradient(180deg, #121212 0%, rgba(10, 10, 10, 1) 100%);
+      
+
+
+
+
+
+        /* Serif fonts */
+  --font-merriweather: "Merriweather", serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-crimson: "Crimson Pro", serif;
+  --font-bitter: "Bitter", serif;
+
+  /* Sans-serif fonts */
+  --font-inter: "Inter", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
+}
+
+
+.status-green {
+  background-color: var(--status-green);
+}
+
+.status-red {
+  background-color: var(--status-red);
+}
+
+.status-yellow {
+  background-color: var(--status-yellow);
+}
