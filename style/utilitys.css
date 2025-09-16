@@ -2,6 +2,20 @@
     --status-yellow:#ff6000;
     --status-green:#498143;
     --status-red:#ff000c;
+
+
+     --status-yellow-dark:#702b00;
+    --status-green-dark:#183d14;
+    --status-red-dark:#511518;
+
+
+
+      --status-yellow-dark-bottom:#c94e02;
+    --status-green-dark-bottom:#34722d;
+    --status-red-dark-bottom:#b40009;
+
+
+
     --gray-color:#292929;
     --background-color:#ffffff;
 
@@ -62,6 +76,35 @@ i {
 
 
 
+.status-green-dark {
+  background-color: var(--status-green-dark);
+}
+
+.status-red-dark {
+  background-color: var(--status-red-dark);
+}
+
+.status-yellow-dark {
+  background-color: var(--status-yellow-dark);
+}
+
+
+.status-green-dark-bottom {
+  background-color: var(--status-green-dark-bottom);
+}
+
+.status-red-dark-bottom {
+  background-color: var(--status-red-dark-bottom);
+}
+
+.status-yellow-dark-bottom {
+ 
+  background-color: var(--status-yellow-dark-bottom);
+}
+
+
+
+
 
 
 .open-description {
@@ -74,25 +117,26 @@ body {
 
 
 
+/* Estiliza o input date */
+input[type="date"] {
+  position: relative;
+  background: url("../assets/icon/017-calendar.png") no-repeat right 10px center;
+  background-size: 20px; /* tamanho do ícone */
+  padding-right: 40px;   /* espaço para o texto não colidir */
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Mantém o botão do calendário ativo, mas invisível */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
-  appearance: none;
+  position: absolute;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  opacity: 0;      /* invisível, mas clicável */
+  cursor: pointer; /* mantém o cursor de clique */
 }
 
-/* Firefox */
-input[type="date"] {
-  -moz-appearance: textfield; /* esconde setinhas e ícone */
-}
-
-/* remove o fundo padrão em navegadores que colocam */
-input[type="date"] {
-  background-image: none;
-}
-
-
-input::placeholder {
-  color: var(--background-color);
-}
 
 

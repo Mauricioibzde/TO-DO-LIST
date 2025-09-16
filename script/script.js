@@ -1,13 +1,17 @@
+// ===============================
 // Seletores globais de inputs
+// ===============================
 const input_add_task = document.querySelector(".input-add-task");
 const input_Date = document.getElementById("date");
-let description_of_the_task = document.querySelector(".add-description"); // CORRIGIDO: antes usava id errado
+let description_of_the_task = document.querySelector(".add-description"); // Corrigido: antes usava id errado
 
 console.log(input_add_task);
 console.log(input_Date);
 console.log(description_of_the_task);
 
+// ===============================
 // Função para abrir/fechar menu lateral
+// ===============================
 function openMenuSiseBar() {
   const btnMenuSideBar = document.querySelector("#btn-open-menu-side-bar");
   const menuSidebar = document.querySelector(".menu-side-bar");
@@ -19,18 +23,22 @@ function openMenuSiseBar() {
 }
 openMenuSiseBar();
 
-// Função para verificar status da data
-function GetTime() {
+// ===============================
+// Função para verificar status da data e alterar ícone de forma dinâmica
+// ===============================
+function GetTime(task) {
   const now = new Date();
   const day = now.getDate();
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
 
-  console.log(`Hoje: ${day}/${month}/${year}`);
-
   function showStatusColor() {
-    const statusGreen = document.querySelector(".checkbox-status-description");
-    const statusDate = document.querySelector("div.date");
+    // Pega elementos DENTRO da task clicada
+    const status_task_color = task.querySelector(".checkbox-status-description");
+    const statusDate = task.querySelector(".date");
+    const description = task.querySelector(".show-description");
+    const menu_editing_save_delete = task.querySelector(".menu-editing-save-delete");
+    const statusIcon = task.querySelector(".status-date img"); // 🔥 ícone do calendário
     const input_Date = document.getElementById("date");
 
     if (!input_Date || !input_Date.value) {
@@ -48,27 +56,57 @@ function GetTime() {
     const diffTime = dueDate - today;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    console.log(`Faltam ${diffDays} dias para a tarefa`);
-
-    statusGreen.classList.remove("status-red", "status-yellow", "status-green");
+    // Limpa classes anteriores
+    status_task_color.classList.remove("status-red", "status-yellow", "status-green");
     statusDate.classList.remove("status-red", "status-yellow", "status-green");
+    description.classList.remove("status-red-dark", "status-yellow-dark", "status-green-dark");
+    menu_editing_save_delete.classList.remove("status-red-dark-bottom", "status-yellow-dark-bottom", "status-green-dark-bottom");
 
+    // Aplica cores e troca ícones dinamicamente
     if (diffDays < 0) {
-      statusGreen.classList.add("status-red");
+      status_task_color.classList.add("status-red");
       statusDate.classList.add("status-red");
+      description.classList.add("status-red-dark");
+      menu_editing_save_delete.classList.add("status-red-dark-bottom");
+      statusIcon.src = "assets/icon/Asset 2@2000x.png"; // ícone vermelho
     } else if (diffDays <= 3) {
-      statusGreen.classList.add("status-yellow");
+      status_task_color.classList.add("status-yellow");
       statusDate.classList.add("status-yellow");
+      description.classList.add("status-yellow-dark");
+      menu_editing_save_delete.classList.add("status-yellow-dark-bottom");
+      statusIcon.src = "assets/icon/Asset 10@2000x.png"; // ícone amarelo
     } else {
-      statusGreen.classList.add("status-green");
+      status_task_color.classList.add("status-green");
       statusDate.classList.add("status-green");
+      description.classList.add("status-green-dark");
+      menu_editing_save_delete.classList.add("status-green-dark-bottom");
+      statusIcon.src = "assets/icon/Asset 9@2000x.png"; // ícone verde
     }
   }
 
   showStatusColor();
 }
 
-// CORRIGIDO: Delegação de eventos para abrir descrição
+// ===============================
+// Bloqueia datas passadas no input e seta data de hoje
+// ===============================
+function setTodayAsPlaceholder() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
+
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+
+  input_Date.setAttribute("min", todayStr);
+  input_Date.value = todayStr;
+  input_Date.setAttribute("placeholder", todayStr);
+}
+setTodayAsPlaceholder();
+
+// ===============================
+// Abrir descrição
+// ===============================
 function showDescription() {
   const taskList = document.querySelector("#liste-of-the-aplication");
 
@@ -85,20 +123,39 @@ function showDescription() {
 }
 showDescription();
 
-// CORRIGIDO: Delegação de eventos para checkboxes
+// ===============================
+// Checkboxes
+// ===============================
 function checkBox() {
   const taskList = document.querySelector("#liste-of-the-aplication");
 
   taskList.addEventListener("click", (event) => {
     if (event.target.classList.contains("checkbox")) {
       const task = event.target.closest("li");
-      task.classList.toggle("backfround-list");
+      const status_task_color = task.querySelector(".checkbox-status-description");
+      const statusDate = task.querySelector(".date");
+      const statusIcon = task.querySelector(".status-date img"); // 🔥 precisa estar dentro da task
+
+      status_task_color.classList.toggle("background-list-checked");
+      statusDate.classList.toggle("background-list-checked");
+
+      // Altera ícone quando a checkbox for marcada/desmarcada
+      if (status_task_color.classList.contains("background-list-checked")) {
+        statusIcon.src = "assets/icon/Asset 4@2000x.png"; // ícone marcado
+      } else {
+        // Retorna ao ícone padrão da cor da task
+        if (status_task_color.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
+        else if (status_task_color.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
+        else statusIcon.src = "assets/icon/Asset 9@2000x.png"; // verde
+      }
     }
   });
 }
 checkBox();
 
-// Função para adicionar nova task
+// ===============================
+// Adicionar nova task
+// ===============================
 function addTask() {
   const btnAddTask = document.querySelector("#btn-add-task");
   btnAddTask.addEventListener("click", () => {
@@ -133,6 +190,9 @@ function addTask() {
 
     list_of_the_task.appendChild(new_element_task);
     console.log("Nova tarefa adicionada!");
+
+    // Aplica cores e ícones dinamicamente
+    GetTime(new_element_task);
   });
 }
 addTask();
