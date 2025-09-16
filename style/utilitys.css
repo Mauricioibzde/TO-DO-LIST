@@ -3,10 +3,17 @@
     --status-green:#498143;
     --status-red:#ff000c;
     --gray-color:#292929;
-    --background-color:#0c0b0b;
+    --background-color:#ffffff;
 
       --background-gradiente: linear-gradient(180deg, #292929 0%, rgba(10, 10, 10, 1) 100%);
        --background-gradiente-js: linear-gradient(180deg, #121212 0%, rgba(10, 10, 10, 1) 100%);
+
+
+       --bg: #ffffff;
+  --accent: #6c63ff;
+  --muted: #8b8fa6;
+  --border: #e6e8f2;
+  --radius: 12px;
       
 
 
@@ -23,6 +30,21 @@
   --font-inter: "Inter", sans-serif;
   --font-open-sans: "Open Sans", sans-serif;
   --font-bebas: "Bebas Neue", sans-serif;
+
+
+
+
+
+
+}
+
+i {
+  align-self: center;
+  width: 2rem;
+
+  & img {
+    width: 100%;
+  }
 }
 
 
@@ -37,3 +59,40 @@
 .status-yellow {
   background-color: var(--status-yellow);
 }
+
+
+
+
+
+.open-description {
+  background: var(--background-gradiente-js);
+}
+
+body {
+  background: var(--background-gradiente-js);
+}
+
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Firefox */
+input[type="date"] {
+  -moz-appearance: textfield; /* esconde setinhas e ícone */
+}
+
+/* remove o fundo padrão em navegadores que colocam */
+input[type="date"] {
+  background-image: none;
+}
+
+
+input::placeholder {
+  color: var(--background-color);
+}
+
+

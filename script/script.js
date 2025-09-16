@@ -1,20 +1,25 @@
+// Seletores globais de inputs
+const input_add_task = document.querySelector(".input-add-task");
+const input_Date = document.getElementById("date");
+let description_of_the_task = document.querySelector(".add-description"); // CORRIGIDO: antes usava id errado
 
-function openMenuSiseBar () {
-  const btnMenuSideBar = document.querySelector("button#btn-open-menu-side-bar")
-  const menuSidebar = document.querySelector("nav.menu-side-bar")
-  console.log(btnMenuSideBar)
-  console.log(menuSidebar)
+console.log(input_add_task);
+console.log(input_Date);
+console.log(description_of_the_task);
 
+// Função para abrir/fechar menu lateral
+function openMenuSiseBar() {
+  const btnMenuSideBar = document.querySelector("#btn-open-menu-side-bar");
+  const menuSidebar = document.querySelector(".menu-side-bar");
 
-  btnMenuSideBar.addEventListener("click",()=>{
-    console.log("clicou")
-
-    menuSidebar.classList.toggle("active")
-  })
+  btnMenuSideBar.addEventListener("click", () => {
+    console.log("clicou");
+    menuSidebar.classList.toggle("active");
+  });
 }
-openMenuSiseBar()
+openMenuSiseBar();
 
-
+// Função para verificar status da data
 function GetTime() {
   const now = new Date();
   const day = now.getDate();
@@ -24,97 +29,110 @@ function GetTime() {
   console.log(`Hoje: ${day}/${month}/${year}`);
 
   function showStatusColor() {
-    const statusGreen = document.querySelector("div.status");
-    const statusDate = document.querySelector("div.date")
-    console.log(statusGreen);
+    const statusGreen = document.querySelector(".checkbox-status-description");
+    const statusDate = document.querySelector("div.date");
+    const input_Date = document.getElementById("date");
 
-    // Data da tarefa (exemplo)
-    let UserDay = 4;
-    let UserMonth = 9;
-    let UserYear = 2025;
+    if (!input_Date || !input_Date.value) {
+      console.log("Nenhuma data escolhida ainda");
+      return;
+    }
 
-    // Criar objetos de data
+    const [yyyy, mm, dd] = input_Date.value.split("-");
     const today = new Date(year, month - 1, day);
-    const dueDate = new Date(UserYear, UserMonth - 1, UserDay);
+    today.setHours(0, 0, 0, 0);
 
-    // Diferença em milissegundos
+    const dueDate = new Date(yyyy, mm - 1, dd);
+    dueDate.setHours(0, 0, 0, 0);
+
     const diffTime = dueDate - today;
-
-    // Converter para dias
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     console.log(`Faltam ${diffDays} dias para a tarefa`);
 
-    if (diffDays < 0) {
-      console.log("Tarefa vencida! coloque uma cor vermelha");
-      statusGreen.classList.add("status-red")
-      statusDate.classList.add("status-red")
+    statusGreen.classList.remove("status-red", "status-yellow", "status-green");
+    statusDate.classList.remove("status-red", "status-yellow", "status-green");
 
+    if (diffDays < 0) {
+      statusGreen.classList.add("status-red");
+      statusDate.classList.add("status-red");
     } else if (diffDays <= 3) {
-      console.log("Tarefa prestes a vencer! coloque a cor amarela");
-      statusGreen.classList.add("status-yellow")
-       statusDate.classList.add("status-yellow")
-    
+      statusGreen.classList.add("status-yellow");
+      statusDate.classList.add("status-yellow");
     } else {
-      console.log("Tranquilo, você ainda tem tempo! coloque a cor verde");
-      statusGreen.classList.add("status-green")
-      statusDate.classList.add("status-green")
+      statusGreen.classList.add("status-green");
+      statusDate.classList.add("status-green");
     }
   }
 
   showStatusColor();
 }
-GetTime();
 
+// CORRIGIDO: Delegação de eventos para abrir descrição
 function showDescription() {
-  const openDescription = document.querySelector("div.open-description");
-  const menuDescription = document.querySelector("div.menu-editing-save-delete")
-  menuDescription.classList.add("test");
-  console.log(menuDescription)
-  const btnDescription = document.querySelector("button#btn-description");
+  const taskList = document.querySelector("#liste-of-the-aplication");
 
-  btnDescription.addEventListener("click", () => {
-    openDescription.classList.toggle("active");
+  taskList.addEventListener("click", (event) => {
+    if (event.target.closest(".btn-description")) {
+      const task = event.target.closest("li");
+      const openDescription = task.querySelector(".open-description");
+      const menuDescription = task.querySelector(".menu-editing-save-delete");
 
-    menuDescription.classList.toggle("active"); 
-  
-   
-      
-    
+      openDescription.classList.toggle("active");
+      menuDescription.classList.toggle("active");
+    }
   });
 }
 showDescription();
 
-function checkBox () {
-    const checkBox = document.querySelector("input#checkbox")
-    console.log(checkBox)
-    
+// CORRIGIDO: Delegação de eventos para checkboxes
+function checkBox() {
+  const taskList = document.querySelector("#liste-of-the-aplication");
 
-    const listOfTheAplication = document.querySelector("ul#liste-of-the-aplication")
-  
-   
-    console.log(listOfTheAplication)
-
-   checkBox.addEventListener("click", () => {
-listOfTheAplication.classList.toggle("background-js")
-});
-listOfTheAplication.classList.add("backfround-list")
+  taskList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("checkbox")) {
+      const task = event.target.closest("li");
+      task.classList.toggle("backfround-list");
+    }
+  });
 }
-checkBox ()
+checkBox();
 
-function addTask () {
- const btnAddTask = document.querySelector("button#btn-add-task")
-        btnAddTask.addEventListener("click", ()=>{
-          console.log("clicou")
-        })
+// Função para adicionar nova task
+function addTask() {
+  const btnAddTask = document.querySelector("#btn-add-task");
+  btnAddTask.addEventListener("click", () => {
+    const list_of_the_task = document.getElementById("liste-of-the-aplication");
+    const new_element_task = document.createElement("li");
+
+    new_element_task.innerHTML = `
+      <div>
+        <div class="status-date">
+          <div class="date">
+            <span>${input_Date.value}</span>
+            <span><img src="assets/icon/Asset 10@2000x.png" alt=""></span>
+          </div>
+        </div>
+      </div>
+      <div class="checkbox-status-description">
+        <input type="checkbox" class="checkbox">
+        <p>${input_add_task.value}</p>
+        <button class="btn-description"><img src="assets/icon/011-copywriting.png" alt=""></button>
+      </div>
+      <div class="open-description display-none">
+        <div class="show-description">
+          <p>${description_of_the_task.value}</p>
+        </div>
+      </div>
+      <div class="menu-editing-save-delete">
+        <button>Editar</button>
+        <button>Salvar</button>
+        <button>Deletar</button>
+      </div>
+    `;
+
+    list_of_the_task.appendChild(new_element_task);
+    console.log("Nova tarefa adicionada!");
+  });
 }
-
-addTask()
-
-
-
-
-
-
-
-
+addTask();

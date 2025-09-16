@@ -1,6 +1,6 @@
 
 :root {
-       --background-color:#0c0b0b;
+       --background-color:#ffffff;
        --low-gray:#272626;
        --border-color:#8758ff;
 
@@ -18,6 +18,7 @@
 
 body {
     background-color: var(--background-color);
+    height: 100dvh;
 }
 
 .title {
@@ -81,10 +82,19 @@ header {
       padding:1rem ;
         color: white;
         font-family: var(--font-bitter);
+        justify-self: center;
     }
 
-    & input {
-        max-width: 600px;
+    & div {
+      display: flex;
+      gap: 1rem;
+    }
+
+    & input {color: var(--background-color);
+      width: 100%;
+      height: 4rem;
+        
+         border: 2px solid var(--low-gray);
 
        background-color:var(--low-gray) ;
         border-radius: 1rem;
@@ -102,6 +112,8 @@ header {
         background-color:var(--low-gray);
         border: none;
         resize: none;
+        color: var(--background-color);
+        
     }
 
     & input:focus {

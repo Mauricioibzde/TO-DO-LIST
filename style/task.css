@@ -1,6 +1,6 @@
  
 .background-list {
-    background: var(--background-gradiente);
+   
 }
 
 #liste-of-the-aplication {
@@ -28,6 +28,7 @@
             align-items: center;
             font-family: "Bitter", serif;
             font-size: .8rem;
+        
             
             
            
@@ -37,22 +38,43 @@
                 width: 5rem;
                 height: 2rem;
                 display: grid;
-                justify-content: center;
+                justify-content: end;
                 align-items: center;
                 border-radius: 0 1rem 0 0;
                 color: white;
+                  
+
+          
                 
             }
 
             & .date {
-                
-                width: 5rem;
-                height: 2rem;
-                display: grid;
+                display: flex;
+                width: 10rem;
+                height: 2.1rem;
+                gap: 1rem;
+            
                 justify-content: center;
                 align-items: center;
-                border-radius: 1rem 0 0 0;
+                border-radius: 1rem 1rem 0 0;
                  color: white;
+                
+               
+
+                 & span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                     font-family: var(--font-storyscript);
+                     font-weight: 700;
+
+                      
+                    & img {
+                        width: 2rem;
+                       
+                       
+                    }
+                 }
             }
         }
 
@@ -78,7 +100,7 @@
             & button {
                 background-color: transparent;
                 border: none;
-                height: 2.5rem;
+                height: 2rem;
                 cursor: pointer;
                 & img {
                     width: 100%;
@@ -90,6 +112,7 @@
 
         & .show-description {
             padding: 1rem 2.4rem;
+             font-family: var(--font-storyscript);
             
             height: 100%;
 
@@ -163,9 +186,7 @@
 
 
 
-.backfround-list {
-    background: var(--background-gradiente);
-}
+
 
 
   .background-js {
