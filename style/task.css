@@ -4,7 +4,7 @@
 #liste-of-the-aplication {
   margin: 0 auto;
   max-width: 600px;
-  max-height: 290px;
+  max-height: 200px;
   overflow-y: auto;
   display: grid;
   gap: 1rem;
@@ -207,7 +207,7 @@ textarea::placeholder {
 /* ===============================
    Responsivo
    =============================== */
-@media (max-width: 480px) {
+@media (max-width: 320px) {
   .checkbox-status-description {
     grid-template-columns: auto 1fr auto;
     gap: 0.5rem;
@@ -231,5 +231,9 @@ textarea::placeholder {
   .status-date .date span img {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  #liste-of-the-aplication {
+    max-height: 210px !important;
   }
 }

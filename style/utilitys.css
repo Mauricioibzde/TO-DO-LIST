@@ -49,6 +49,10 @@ body {
     background: var(--background-gradiente-js);
 }
 
+main {
+    height: 100dvh;
+}
+
 /* Status classes */
 .status-green { background-color: var(--status-green); }
 .status-red { background-color: var(--status-red); }
