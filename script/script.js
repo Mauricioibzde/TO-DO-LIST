@@ -1,12 +1,12 @@
 // ======================================
 // Seletores globais de inputs
 // ======================================
-const input_add_task = document.querySelector(".input-add-task"); // Input do título da task
-const input_Date = document.getElementById("date"); // Input de data
-const description_of_the_task = document.querySelector(".add-description"); // Textarea da descrição
+const inputAddTask = document.querySelector(".input-add-task"); // Input do título da task
+const inputDate = document.getElementById("date");              // Input de data
+const descriptionOfTask = document.querySelector(".add-description"); // Textarea da descrição
 
 // ======================================
-// Função para setar data mínima e placeholder como hoje
+// Função para setar placeholder como hoje
 // ======================================
 function setTodayAsPlaceholder() {
   const today = new Date();
@@ -16,61 +16,55 @@ function setTodayAsPlaceholder() {
 
   const todayStr = `${yyyy}-${mm}-${dd}`;
 
-  input_Date.setAttribute("min", todayStr); // Impede datas passadas
-  input_Date.value = todayStr;              // Valor inicial
-  input_Date.setAttribute("placeholder", todayStr); // Placeholder
+  inputDate.setAttribute("min", todayStr); // Impede datas passadas
+  inputDate.setAttribute("placeholder", todayStr); // Placeholder visível
+  inputDate.value = ""; // Remove valor inicial
 }
 setTodayAsPlaceholder();
 
 // ======================================
 // Função para aplicar status de cores e ícones conforme data
 // ======================================
-function GetTime(task) {
+function applyTaskStatus(task) {
   const now = new Date();
-  const day = now.getDate();
-  const month = now.getMonth() + 1;
-  const year = now.getFullYear();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  const status_task_color = task.querySelector(".checkbox-status-description");
-  const statusDate = task.querySelector(".date");
-  const description = task.querySelector(".show-description");
-  const menu_editing_save_delete = task.querySelector(".menu-editing-save-delete");
+  const statusDiv = task.querySelector(".checkbox-status-description");
+  const statusDateDiv = task.querySelector(".date");
+  const descriptionDiv = task.querySelector(".show-description");
+  const menuDiv = task.querySelector(".menu-editing-save-delete");
   const statusIcon = task.querySelector(".status-date img");
 
-  const [yyyy, mm, dd] = input_Date.value.split("-");
-  const today = new Date(year, month - 1, day);
-  today.setHours(0, 0, 0, 0);
-
+  const [yyyy, mm, dd] = inputDate.value.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
   dueDate.setHours(0, 0, 0, 0);
 
-  const diffTime = dueDate - today;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
 
-  // Limpa classes antigas
-  status_task_color.classList.remove("status-red", "status-yellow", "status-green");
-  statusDate.classList.remove("status-red", "status-yellow", "status-green");
-  description.classList.remove("status-red-dark", "status-yellow-dark", "status-green-dark");
-  menu_editing_save_delete.classList.remove("status-red-dark-bottom", "status-yellow-dark-bottom", "status-green-dark-bottom");
+  // Remove classes antigas
+  statusDiv.classList.remove("status-red", "status-yellow", "status-green");
+  statusDateDiv.classList.remove("status-red", "status-yellow", "status-green");
+  descriptionDiv.classList.remove("status-red-dark", "status-yellow-dark", "status-green-dark");
+  menuDiv.classList.remove("status-red-dark-bottom", "status-yellow-dark-bottom", "status-green-dark-bottom");
 
   // Aplica cores e troca ícone
   if (diffDays < 0) {
-    status_task_color.classList.add("status-red");
-    statusDate.classList.add("status-red");
-    description.classList.add("status-red-dark");
-    menu_editing_save_delete.classList.add("status-red-dark-bottom");
+    statusDiv.classList.add("status-red");
+    statusDateDiv.classList.add("status-red");
+    descriptionDiv.classList.add("status-red-dark");
+    menuDiv.classList.add("status-red-dark-bottom");
     statusIcon.src = "assets/icon/Asset 2@2000x.png";
   } else if (diffDays <= 3) {
-    status_task_color.classList.add("status-yellow");
-    statusDate.classList.add("status-yellow");
-    description.classList.add("status-yellow-dark");
-    menu_editing_save_delete.classList.add("status-yellow-dark-bottom");
+    statusDiv.classList.add("status-yellow");
+    statusDateDiv.classList.add("status-yellow");
+    descriptionDiv.classList.add("status-yellow-dark");
+    menuDiv.classList.add("status-yellow-dark-bottom");
     statusIcon.src = "assets/icon/Asset 10@2000x.png";
   } else {
-    status_task_color.classList.add("status-green");
-    statusDate.classList.add("status-green");
-    description.classList.add("status-green-dark");
-    menu_editing_save_delete.classList.add("status-green-dark-bottom");
+    statusDiv.classList.add("status-green");
+    statusDateDiv.classList.add("status-green");
+    descriptionDiv.classList.add("status-green-dark");
+    menuDiv.classList.add("status-green-dark-bottom");
     statusIcon.src = "assets/icon/Asset 9@2000x.png";
   }
 }
@@ -78,49 +72,49 @@ function GetTime(task) {
 // ======================================
 // Função para abrir/fechar descrição e menu de edição
 // ======================================
-function showDescription() {
+function toggleDescription() {
   const taskList = document.querySelector("#liste-of-the-aplication");
 
   taskList.addEventListener("click", (event) => {
     if (event.target.closest(".btn-description")) {
       const task = event.target.closest("li");
-      const openDescription = task.querySelector(".open-description");
-      const menuDescription = task.querySelector(".menu-editing-save-delete");
+      const openDesc = task.querySelector(".open-description");
+      const menuDiv = task.querySelector(".menu-editing-save-delete");
 
-      openDescription.classList.toggle("active");
-      menuDescription.classList.toggle("active");
+      openDesc.classList.toggle("active");
+      menuDiv.classList.toggle("active");
     }
   });
 }
-showDescription();
+toggleDescription();
 
 // ======================================
 // Função para lidar com checkbox
 // ======================================
-function checkBox() {
+function handleCheckbox() {
   const taskList = document.querySelector("#liste-of-the-aplication");
 
   taskList.addEventListener("click", (event) => {
     if (event.target.classList.contains("checkbox")) {
       const task = event.target.closest("li");
-      const status_task_color = task.querySelector(".checkbox-status-description");
-      const statusDate = task.querySelector(".date");
+      const statusDiv = task.querySelector(".checkbox-status-description");
+      const statusDateDiv = task.querySelector(".date");
       const statusIcon = task.querySelector(".status-date img");
 
-      status_task_color.classList.toggle("background-list-checked");
-      statusDate.classList.toggle("background-list-checked");
+      statusDiv.classList.toggle("background-list-checked");
+      statusDateDiv.classList.toggle("background-list-checked");
 
-      if (status_task_color.classList.contains("background-list-checked")) {
+      if (statusDiv.classList.contains("background-list-checked")) {
         statusIcon.src = "assets/icon/Asset 4@2000x.png"; // ícone marcado
       } else {
-        if (status_task_color.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
-        else if (status_task_color.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
+        if (statusDiv.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
+        else if (statusDiv.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
         else statusIcon.src = "assets/icon/Asset 9@2000x.png";
       }
     }
   });
 }
-checkBox();
+handleCheckbox();
 
 // ======================================
 // Função para adicionar nova task
@@ -129,8 +123,8 @@ function addTask() {
   const btnAddTask = document.querySelector("#btn-add-task");
 
   btnAddTask.addEventListener("click", () => {
-    const list_of_the_task = document.getElementById("liste-of-the-aplication");
-    const new_element_task = document.createElement("li");
+    const listOfTasks = document.getElementById("liste-of-the-aplication");
+    const newTask = document.createElement("li");
 
     // -----------------------------
     // Status-date
@@ -143,7 +137,7 @@ function addTask() {
     dateDiv.classList.add("date");
 
     const spanDate = document.createElement("span");
-    spanDate.textContent = input_Date.value;
+    spanDate.textContent = inputDate.value;
 
     const spanImg = document.createElement("span");
     const img = document.createElement("img");
@@ -165,7 +159,7 @@ function addTask() {
     checkboxInput.classList.add("checkbox");
 
     const pTitle = document.createElement("p");
-    pTitle.textContent = input_add_task.value;
+    pTitle.textContent = inputAddTask.value;
 
     const btnDescription = document.createElement("button");
     btnDescription.classList.add("btn-description");
@@ -185,36 +179,49 @@ function addTask() {
     showDescDiv.classList.add("show-description");
 
     const pDesc = document.createElement("p");
-    pDesc.textContent = description_of_the_task.value;
+    pDesc.textContent = descriptionOfTask.value;
 
     showDescDiv.appendChild(pDesc);
     openDescDiv.appendChild(showDescDiv);
 
     // -----------------------------
-    // Menu de edição
+    // Menu de edição (apenas ícones)
     // -----------------------------
     const menuDiv = document.createElement("div");
     menuDiv.classList.add("menu-editing-save-delete");
 
     const btnEdit = document.createElement("button");
-    btnEdit.textContent = "Editar";
+    const editIcon = document.createElement("img");
+    editIcon.src = "assets/icon/edit.png";
+    btnEdit.appendChild(editIcon);
+
     const btnSave = document.createElement("button");
-    btnSave.textContent = "Salvar";
+    const saveIcon = document.createElement("img");
+    saveIcon.src = "assets/icon/save.png";
+    btnSave.appendChild(saveIcon);
+
     const btnDelete = document.createElement("button");
-    btnDelete.textContent = "Deletar";
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "assets/icon/delete.png";
+    btnDelete.appendChild(deleteIcon);
 
     menuDiv.append(btnEdit, btnSave, btnDelete);
 
     // -----------------------------
     // Monta o li completo
     // -----------------------------
-    new_element_task.append(statusDiv, checkboxDiv, openDescDiv, menuDiv);
-    list_of_the_task.appendChild(new_element_task);
+    newTask.append(statusDiv, checkboxDiv, openDescDiv, menuDiv);
+    listOfTasks.appendChild(newTask);
 
     console.log("Nova tarefa adicionada!");
 
-    // Aplica cores e ícones
-    GetTime(new_element_task);
+    // Aplica cores e ícones conforme data
+    applyTaskStatus(newTask);
+
+    // Limpa inputs após adicionar
+    inputAddTask.value = "";
+    descriptionOfTask.value = "";
+    inputDate.value = "";
   });
 }
 addTask();
