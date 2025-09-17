@@ -3,3 +3,17 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+input, textarea {
+    width: 100%;
+}
+
+main {
+    padding: 2rem  1.5rem;
+}
+
+h1 {
+  font-family: var( --font-bebas);
+  color: white;
+  text-align: center;
+}

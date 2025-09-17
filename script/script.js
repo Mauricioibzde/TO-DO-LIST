@@ -12,7 +12,7 @@ console.log(description_of_the_task);
 // ===============================
 // Função para abrir/fechar menu lateral
 // ===============================
-function openMenuSiseBar() {
+/*function openMenuSiseBar() {
   const btnMenuSideBar = document.querySelector("#btn-open-menu-side-bar");
   const menuSidebar = document.querySelector(".menu-side-bar");
 
@@ -21,7 +21,7 @@ function openMenuSiseBar() {
     menuSidebar.classList.toggle("active");
   });
 }
-openMenuSiseBar();
+openMenuSiseBar();*/
 
 // ===============================
 // Função para verificar status da data e alterar ícone de forma dinâmica

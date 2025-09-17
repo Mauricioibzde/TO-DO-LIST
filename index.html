@@ -14,15 +14,9 @@
       rel="stylesheet">
 </head>
 <body>
-    <header>
-        <button id="btn-open-menu-side-bar">
-          <img src="assets/icon/BTN MENU.png" alt="">
-        </button>
-        <nav class="menu-side-bar">
-            <a href="">Home</a>
-            <a href="">Tarefa</a>
-            <a href="">Tarefa deletadas</a>
-        </nav>
+   <main>
+     <header>
+         <h1>NAT TODO</h1>
     </header>
    
     <div class="menu-add-task">
@@ -32,7 +26,9 @@
                 <input type="date" id="date" name="date" required />
             </div>
         </div>
-        <textarea class="add-description" placeholder="Descrição..."></textarea>
+       <div class="text-area">
+         <textarea class="add-description" placeholder="Descrição..."></textarea>
+       </div>
         <button id="btn-add-task">Adicionar</button>
         <div class="status-error-menssagem">
             <p>Tarefa adicionada com sucesso!</p>
@@ -75,6 +71,7 @@
             </li>
         </ul>
     </div>
+   </main>
 
     <script src="script/script.js"></script>
 </body>

@@ -3,12 +3,70 @@
   background-color: #232323;
 }
 
+/* Botão sempre clicável */
+.btn-description {
+  position: relative;
+  z-index: 10;
+}
+
+/* Menu de edição só aparece quando ativo */
+.menu-editing-save-delete {
+  position: relative;
+  z-index: 5;
+}
+
+/* Descrição escondida não deve ocupar espaço/camadas */
+.open-description.display-none {
+  display: none;
+}
+
+/* Quando ativa, aparece mas não cobre botões */
+.open-description.active {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+
 #liste-of-the-aplication {
+    
     margin: 0 auto;
     max-width: 600px;
+    max-height: 290px;
+    overflow-y: auto;
     
     display: grid;
     gap: 1rem;
+
+     /* estética */
+  padding-right: 0.5rem; /* evita scroll colado no conteúdo */
+  scrollbar-gutter: stable both-edges; /* mantém espaço reservado p/ scrollbar */
+}
+
+
+
+#liste-of-the-aplication::-webkit-scrollbar {
+  width: 6px;               /* largura bem fina */
+}
+
+#liste-of-the-aplication::-webkit-scrollbar-track {
+  background: transparent;  /* trilha invisível */
+}
+
+#liste-of-the-aplication::-webkit-scrollbar-thumb {
+  background-color: #bbb;   /* cor do thumb */
+  border-radius: 4px;       /* arredondado */
+}
+
+#liste-of-the-aplication::-webkit-scrollbar-thumb:hover {
+  background-color: #888;   /* mais escuro ao passar o mouse */
+}
+
+/* Firefox */
+#liste-of-the-aplication {
+  scrollbar-width: thin;          /* mais fino */
+  scrollbar-color: #bbb transparent; /* cor do thumb e da trilha */
+}
 
     & li {
            display: grid;
@@ -159,7 +217,7 @@
 
         }
     }
-}
+
 
 
 
@@ -198,3 +256,11 @@ border-bottom: 1px solid #fdfdfd;
   .background-js {
          background: var(--background-gradiente-js);
         }
+
+
+
+     input::placeholder,
+textarea::placeholder {
+  color: #ffffff;       /* cor do texto */
+          /* Firefox aplica opacidade padrão 0.5 */
+}   

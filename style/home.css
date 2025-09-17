@@ -19,6 +19,7 @@
 body {
     background-color: var(--background-color);
     height: 100dvh;
+   
 }
 
 .title {
@@ -26,7 +27,7 @@ body {
     justify-content: center;
     & h1{
         font-family: var(--font-storyscript);
-        color: white;
+        
        
     }
 }
@@ -60,7 +61,7 @@ header {
    
     & a {
         text-decoration: none;
-        color: white;
+      
     }
     
 }
@@ -71,8 +72,9 @@ header {
 
 
 .menu-add-task {
-    display: grid;
+  
     max-width: 600px;
+    display: grid;
   
     margin: 0 auto;
      text-align: center;
@@ -86,13 +88,15 @@ header {
     }
 
     & div {
-      display: flex;
+    display: flex;
+      
       gap: 1rem;
     }
 
-    & input {color: var(--background-color);
+    & input {
       width: 100%;
       height: 4rem;
+      color: #ffffff;
         
          border: 2px solid var(--low-gray);
 
@@ -104,15 +108,12 @@ header {
       & textarea {
         height: 6rem;
         border-radius: 1rem;
-        max-width: 600px;
-        min-width: 600px;
-        max-height: 200px;
-        min-height: 200px;
+      
         padding: 1.5rem;
         background-color:var(--low-gray);
         border: none;
-        resize: none;
-        color: var(--background-color);
+        resize: none; color: #ffffff;
+       
         
     }
 
