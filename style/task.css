@@ -1,266 +1,218 @@
- 
+/* ===============================
+   Lista de tarefas
+   =============================== */
+#liste-of-the-aplication {
+  margin: 0 auto;
+  max-width: 600px;
+  max-height: 290px;
+  overflow-y: auto;
+  display: grid;
+  gap: 1rem;
+  padding-right: 0.5rem;
+  scrollbar-gutter: stable both-edges;
+
+  /* Scroll minimalista */
+  scrollbar-width: thin;          /* Firefox */
+  scrollbar-color: #bbb transparent;
+}
+
+#liste-of-the-aplication::-webkit-scrollbar {
+  width: 6px;
+}
+#liste-of-the-aplication::-webkit-scrollbar-track {
+  background: transparent;
+}
+#liste-of-the-aplication::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 4px;
+}
+#liste-of-the-aplication::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+/* ===============================
+   Itens da lista
+   =============================== */
+#liste-of-the-aplication li {
+  display: grid;
+  gap: 0.5rem;
+  background-color: #1a1a1a;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Status e data */
+.status-date {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  font-family: "Bitter", serif;
+  font-size: 0.8rem;
+  border-radius: 1rem 1rem 0 0;
+  color: white;
+}
+
+.status-date .date {
+  display: flex;
+  width: 10rem;
+  height: 2.1rem;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.status-date .date span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-storyscript);
+  font-weight: 700;
+}
+
+.status-date .date span img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+/* ===============================
+   Checkbox + texto + botão
+   =============================== */
+.checkbox-status-description {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.checkbox-status-description p {
+  margin: 0;
+  font-family: var(--font-bebas);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  word-break: break-word;
+}
+
+.checkbox-status-description .checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.checkbox-status-description .btn-description {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.checkbox-status-description .btn-description img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ===============================
+   Descrição e menu de edição (animação)
+   =============================== */
+.toggle-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.toggle-content.active {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Aplicar para descrição e menu */
+.open-description,
+.menu-editing-save-delete {
+  border-top: 1px solid #fdfbfb;
+  border-bottom: 1px solid #fdfdfd;
+}
+
+.show-description {
+  padding: 1rem 2.4rem;
+  font-family: var(--font-storyscript);
+  color: #ffffff;
+}
+
+/* ===============================
+   Menu de edição
+   =============================== */
+.menu-editing-save-delete {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr auto auto;
+  padding-inline: 1rem;
+  gap: 1rem;
+}
+
+.menu-editing-save-delete button {
+  width: 4rem;
+  height: 3rem;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.menu-editing-save-delete button:nth-child(1) { justify-self: flex-start; }
+.menu-editing-save-delete button:nth-child(2),
+.menu-editing-save-delete button:nth-child(3) { justify-self: end; }
+
+/* ===============================
+   Background quando marcado
+   =============================== */
 .background-list-checked {
   background-color: #232323;
 }
 
-/* Botão sempre clicável */
-.btn-description {
-  position: relative;
-  z-index: 10;
-}
-
-/* Menu de edição só aparece quando ativo */
-.menu-editing-save-delete {
-  position: relative;
-  z-index: 5;
-}
-
-/* Descrição escondida não deve ocupar espaço/camadas */
-.open-description.display-none {
-  display: none;
-}
-
-/* Quando ativa, aparece mas não cobre botões */
-.open-description.active {
-  display: block;
-  position: relative;
-  z-index: 1;
-}
-
-
-#liste-of-the-aplication {
-    
-    margin: 0 auto;
-    max-width: 600px;
-    max-height: 290px;
-    overflow-y: auto;
-    
-    display: grid;
-    gap: 1rem;
-
-     /* estética */
-  padding-right: 0.5rem; /* evita scroll colado no conteúdo */
-  scrollbar-gutter: stable both-edges; /* mantém espaço reservado p/ scrollbar */
-}
-
-
-
-#liste-of-the-aplication::-webkit-scrollbar {
-  width: 6px;               /* largura bem fina */
-}
-
-#liste-of-the-aplication::-webkit-scrollbar-track {
-  background: transparent;  /* trilha invisível */
-}
-
-#liste-of-the-aplication::-webkit-scrollbar-thumb {
-  background-color: #bbb;   /* cor do thumb */
-  border-radius: 4px;       /* arredondado */
-}
-
-#liste-of-the-aplication::-webkit-scrollbar-thumb:hover {
-  background-color: #888;   /* mais escuro ao passar o mouse */
-}
-
-/* Firefox */
-#liste-of-the-aplication {
-  scrollbar-width: thin;          /* mais fino */
-  scrollbar-color: #bbb transparent; /* cor do thumb e da trilha */
-}
-
-    & li {
-           display: grid;
-           
-           
-
-
-     
-
-     
-      
-
-         
-        .status-date {
-            display: flex;
-           width: max-content;
-            align-items: center;
-            font-family: "Bitter", serif;
-            font-size: .8rem;
-         
-            border-radius: 1rem 1rem 0rem 0rem;
-        
-            
-            
-           
-
-            & .status {
-                
-                width: 5rem;
-                height: 2rem;
-                display: grid;
-                justify-content: end;
-                align-items: center;
-              
-                color: white;
-                  
-
-          
-                
-            }
-
-            & .date {
-                display: flex;
-                width: 10rem;
-                height: 2.1rem;
-                gap: 1rem;
-            
-                justify-content: center;
-                align-items: center;
-                border-radius: 1rem 1rem 0 0;
-                 color: white;
-                
-               
-
-                 & span {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                     font-family: var(--font-storyscript);
-                     font-weight: 700;
-
-                      
-                    & img {
-                        width: 2rem;
-                       
-                       
-                    }
-                 }
-            }
-        }
-
-        .checkbox-status-description {
-            display: grid;
-            grid-auto-flow: column;
-            justify-content: space-between;
-            grid-template-columns: auto 1fr auto;
-            gap: 1rem;
-            align-items: center;
-            padding: .5rem 2.2rem;
-              
-
-
-            & p {
-                justify-self: flex-start;
-                font-family: var(--font-bebas);
-                font-size: 1.5rem;
-                font-weight: 700;
-                letter-spacing: .1rem;
-                color: white;
-                
-            }
-
-            & button {
-                background-color: transparent;
-                border: none;
-                height: 2rem;
-                cursor: pointer;
-                & img {
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            
-        }
-
-        & .show-description {
-            padding: 1rem 2.4rem;
-             font-family: var(--font-storyscript);
-            
-            height: 100%;
-
-            & p {
-                color: #ffffff;
-            }
-        }
-
-        & .menu-editing-save-delete {
-            display: grid;
-            grid-auto-flow: column;
-            grid-template-columns: 1fr auto auto;
-            padding-inline: 1rem;
-            
-            gap: 1rem;
-           
-
-            & button {
-                width: 4rem;
-                height: 3rem;
-               
-                background-color: transparent;
-                border: none;
-                color: white;
-                cursor: pointer;
-                
-            }
-
-            & button:nth-child(1) {
-               justify-self: flex-start;
-            }
-
-            & button:nth-child(2) {
-               justify-self: end;
-            }
-
-            & button:nth-child(3) {
-              justify-self: end;
-            }
-
-        }
-    }
-
-
-
-
-
-
-.open-description {
-  max-height: 0;              /* começa fechada */
-  opacity: 0;                 /* invisível */           /* esconde o conteúdo */
-  transition: all 0.4s ease;
-   border-top: 1px solid #fdfbfb;
-border-bottom: 1px solid #fdfdfd;
-}
-
-.open-description.active {
-  max-height: 500px;          /* altura suficiente para o conteúdo */
-  opacity: 1;
-  
-}
-
-.menu-editing-save-delete {
-  max-height: 0;      /* fechado inicialmente */
-  opacity: 0;
-  overflow: hidden;   /* esconde conteúdo extra */
-  transition: all 0.4s ease; /* suavização */
-}
-.menu-editing-save-delete.active {
-  max-height: 500px; /* altura suficiente para o conteúdo */
-  opacity: 1;
-}
-
-
-
-
-
-
-  .background-js {
-         background: var(--background-gradiente-js);
-        }
-
-
-
-     input::placeholder,
+/* ===============================
+   Placeholder de inputs
+   =============================== */
+input::placeholder,
 textarea::placeholder {
-  color: #ffffff;       /* cor do texto */
-          /* Firefox aplica opacidade padrão 0.5 */
-}   
+  color: #ffffff;
+}
+
+/* ===============================
+   Responsivo
+   =============================== */
+@media (max-width: 480px) {
+  .checkbox-status-description {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .checkbox-status-description p {
+    font-size: 1rem;
+  }
+
+  .checkbox-status-description .btn-description {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .status-date .date {
+    width: 8rem;
+    gap: 0.5rem;
+  }
+
+  .status-date .date span img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

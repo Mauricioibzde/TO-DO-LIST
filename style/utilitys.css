@@ -1,142 +1,207 @@
 :root {
-    --status-yellow:#ff6000;
-    --status-green:#498143;
-    --status-red:#ff000c;
+    /* Status colors */
+    --status-yellow: #ff6000;
+    --status-green: #498143;
+    --status-red: #ff000c;
 
+    --status-yellow-dark: #702b00;
+    --status-green-dark: #183d14;
+    --status-red-dark: #511518;
 
-     --status-yellow-dark:#702b00;
-    --status-green-dark:#183d14;
-    --status-red-dark:#511518;
+    --status-yellow-dark-bottom: #c94e02;
+    --status-green-dark-bottom: #34722d;
+    --status-red-dark-bottom: #b40009;
 
+    /* General colors */
+    --gray-color: #292929;
+    --background-color: #ffffff;
+    --background-gradiente: linear-gradient(180deg, #292929 0%, rgba(10, 10, 10, 1) 100%);
+    --background-gradiente-js: linear-gradient(180deg, #121212 0%, rgba(10, 10, 10, 1) 100%);
 
-
-      --status-yellow-dark-bottom:#c94e02;
-    --status-green-dark-bottom:#34722d;
-    --status-red-dark-bottom:#b40009;
-
-
-
-    --gray-color:#292929;
-    --background-color:#ffffff;
-
-      --background-gradiente: linear-gradient(180deg, #292929 0%, rgba(10, 10, 10, 1) 100%);
-       --background-gradiente-js: linear-gradient(180deg, #121212 0%, rgba(10, 10, 10, 1) 100%);
-
-
-       --bg: #ffffff;
-  --accent: #6c63ff;
-  --muted: #8b8fa6;
-  --border: #e6e8f2;
-  --radius: 12px;
-      
-
-
-
-
-
-        /* Serif fonts */
-  --font-merriweather: "Merriweather", serif;
-  --font-playfair: "Playfair Display", serif;
-  --font-crimson: "Crimson Pro", serif;
-  --font-bitter: "Bitter", serif;
-
-  /* Sans-serif fonts */
-  --font-inter: "Inter", sans-serif;
-  --font-open-sans: "Open Sans", sans-serif;
-  --font-bebas: "Bebas Neue", sans-serif;
-
-
-
-
-
-
+    /* Fonts */
+    --font-merriweather: "Merriweather", serif;
+    --font-playfair: "Playfair Display", serif;
+    --font-crimson: "Crimson Pro", serif;
+    --font-bitter: "Bitter", serif;
+    --font-inter: "Inter", sans-serif;
+    --font-open-sans: "Open Sans", sans-serif;
+    --font-bebas: "Bebas Neue", sans-serif;
 }
 
-i {
-  align-self: center;
-  width: 2rem;
-
-  & img {
-    width: 100%;
-  }
-}
-
-
-.status-green {
-  background-color: var(--status-green);
-}
-
-.status-red {
-  background-color: var(--status-red);
-}
-
-.status-yellow {
-  background-color: var(--status-yellow);
-}
-
-
-
-.status-green-dark {
-  background-color: var(--status-green-dark);
-}
-
-.status-red-dark {
-  background-color: var(--status-red-dark);
-}
-
-.status-yellow-dark {
-  background-color: var(--status-yellow-dark);
-}
-
-
-.status-green-dark-bottom {
-  background-color: var(--status-green-dark-bottom);
-}
-
-.status-red-dark-bottom {
-  background-color: var(--status-red-dark-bottom);
-}
-
-.status-yellow-dark-bottom {
- 
-  background-color: var(--status-yellow-dark-bottom);
-}
-
-
-
-
-
-
-.open-description {
-  background: var(--background-gradiente-js);
-}
-
+/* ============================
+   General */
 body {
-  background: var(--background-gradiente-js);
+    background: var(--background-gradiente-js);
 }
 
+/* Status classes */
+.status-green { background-color: var(--status-green); }
+.status-red { background-color: var(--status-red); }
+.status-yellow { background-color: var(--status-yellow); }
 
+.status-green-dark { background-color: var(--status-green-dark); }
+.status-red-dark { background-color: var(--status-red-dark); }
+.status-yellow-dark { background-color: var(--status-yellow-dark); }
 
-/* Estiliza o input date */
+.status-green-dark-bottom { background-color: var(--status-green-dark-bottom); }
+.status-red-dark-bottom { background-color: var(--status-red-dark-bottom); }
+.status-yellow-dark-bottom { background-color: var(--status-yellow-dark-bottom); }
+
+/* ============================
+   Inputs & textarea */
+input::placeholder,
+textarea::placeholder {
+    color: #ffffff;
+}
+
+/* Input date com ícone */
 input[type="date"] {
-  position: relative;
-  background: url("../assets/icon/017-calendar.png") no-repeat right 10px center;
-  background-size: 20px; /* tamanho do ícone */
-  padding-right: 40px;   /* espaço para o texto não colidir */
-  height: 40px;
-  font-size: 16px;
-  cursor: pointer;
+    position: relative;
+    background: url("../assets/icon/017-calendar.png") no-repeat right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
 }
-
-/* Mantém o botão do calendário ativo, mas invisível */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  position: absolute;
-  right: 10px;
-  width: 20px;
-  height: 20px;
-  opacity: 0;      /* invisível, mas clicável */
-  cursor: pointer; /* mantém o cursor de clique */
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    cursor: pointer;
 }
 
+/* ============================
+   Lista de tarefas */
+#liste-of-the-aplication {
+    margin: 0 auto;
+    max-width: 600px;
+    max-height: 290px;
+    overflow-y: auto;
+    display: grid;
+    gap: 1rem;
+    padding-right: 0.5rem;
+    scrollbar-gutter: stable both-edges;
+}
 
+/* Scrollbar */
+#liste-of-the-aplication::-webkit-scrollbar { width: 6px; }
+#liste-of-the-aplication::-webkit-scrollbar-track { background: transparent; }
+#liste-of-the-aplication::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 4px;
+}
+#liste-of-the-aplication::-webkit-scrollbar-thumb:hover { background-color: #888; }
+#liste-of-the-aplication { scrollbar-width: thin; scrollbar-color: #bbb transparent; }
 
+/* Lista items */
+#liste-of-the-aplication li {
+    display: grid;
+}
+
+/* Status date */
+.status-date {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    font-family: var(--font-bitter);
+    font-size: .8rem;
+    border-radius: 1rem 1rem 0 0;
+}
+.status-date .date {
+    display: flex;
+    width: 10rem;
+    height: 2.1rem;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem 1rem 0 0;
+    color: white;
+}
+.status-date .date span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-storyscript);
+    font-weight: 700;
+}
+.status-date .date span img { width: 2rem; }
+
+/* Checkbox & description */
+.checkbox-status-description {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: .5rem 2.2rem;
+}
+.checkbox-status-description p {
+    justify-self: flex-start;
+    font-family: var(--font-bebas);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    color: white;
+}
+.checkbox-status-description button {
+    background-color: transparent;
+    border: none;
+    height: 2rem;
+    cursor: pointer;
+}
+.checkbox-status-description button img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Open description */
+.open-description {
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+    border-top: 1px solid #fdfbfb;
+    border-bottom: 1px solid #fdfdfd;
+}
+.open-description.active {
+    max-height: 500px;
+    opacity: 1;
+    background: var(--background-gradiente-js);
+}
+
+/* Menu editing buttons */
+.menu-editing-save-delete {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr auto auto;
+    padding-inline: 1rem;
+    gap: 1rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.menu-editing-save-delete.active { max-height: 500px; opacity: 1; }
+.menu-editing-save-delete button {
+    width: 4rem;
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.menu-editing-save-delete button:nth-child(1) { justify-self: flex-start; }
+.menu-editing-save-delete button:nth-child(2),
+.menu-editing-save-delete button:nth-child(3) { justify-self: end; }
+
+/* Background checked */
+.background-list-checked { background-color: #232323; }
+
+/* Botão descrição sempre clicável */
+.btn-description { position: relative; z-index: 10; }
+
+/* Ícones dentro de i */
+i img { width: 100%; }
