@@ -40,7 +40,7 @@
   --font-merriweather: "Merriweather", serif;
   --font-opensans: "Open Sans", sans-serif;
   --font-playfair: "Playfair Display", serif;
-  --font-storyscript: "Story Script", cursive;
+ 
 }
 
 /* ============================
@@ -139,7 +139,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: var(--font-storyscript);
+   
     font-weight: 700;
 }
 .status-date .date span img { width: 2rem; }
