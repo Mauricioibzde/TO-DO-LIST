@@ -141,6 +141,12 @@
 }
 
 .show-description {
+
+    font-family: var(--font-storyscript); /* mesma fonte do textarea */
+  font-size: 1rem; /* ajuste se necessário */
+  color: #ffffff;
+  line-height: 1.5;
+  word-break: break-word; /* evita quebrar palavras grandes */
   padding: 1rem 2.4rem;
   font-family: var(--font-storyscript);
   color: #ffffff;
