@@ -37,6 +37,7 @@
   background-color: var(--low-gray);
   border-radius: 1rem;
   overflow: hidden;
+      font-family: var( --font-bebas);
 }
 
 /* Status e data */
