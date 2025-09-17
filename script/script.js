@@ -6,9 +6,9 @@ const inputDate = document.getElementById("date");              // Input de data
 const descriptionOfTask = document.querySelector(".add-description"); // Textarea da descrição
 
 // ======================================
-// Função para setar placeholder como hoje
+// Função para setar a data atual no input
 // ======================================
-function setTodayAsPlaceholder() {
+function setTodayAsValue() {
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -17,10 +17,10 @@ function setTodayAsPlaceholder() {
   const todayStr = `${yyyy}-${mm}-${dd}`;
 
   inputDate.setAttribute("min", todayStr); // Impede datas passadas
-  inputDate.setAttribute("placeholder", todayStr); // Placeholder visível
-  inputDate.value = ""; // Remove valor inicial
+  inputDate.value = todayStr;              // Valor inicial: data de hoje
+  inputDate.setAttribute("placeholder", todayStr); // Placeholder opcional
 }
-setTodayAsPlaceholder();
+setTodayAsValue(); // Executa ao carregar a página
 
 // ======================================
 // Função para aplicar status de cores e ícones conforme data
@@ -35,7 +35,9 @@ function applyTaskStatus(task) {
   const menuDiv = task.querySelector(".menu-editing-save-delete");
   const statusIcon = task.querySelector(".status-date img");
 
-  const [yyyy, mm, dd] = inputDate.value.split("-");
+  // Se o input estiver vazio, usar a data atual
+  let inputValue = inputDate.value || `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+  const [yyyy, mm, dd] = inputValue.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
   dueDate.setHours(0, 0, 0, 0);
 
@@ -137,7 +139,8 @@ function addTask() {
     dateDiv.classList.add("date");
 
     const spanDate = document.createElement("span");
-    spanDate.textContent = inputDate.value;
+    // Exibe a data atual se o input estiver vazio
+    spanDate.textContent = inputDate.value || new Date().toISOString().split("T")[0];
 
     const spanImg = document.createElement("span");
     const img = document.createElement("img");
@@ -221,7 +224,7 @@ function addTask() {
     // Limpa inputs após adicionar
     inputAddTask.value = "";
     descriptionOfTask.value = "";
-    inputDate.value = "";
+    setTodayAsValue(); // Reinsere a data atual no input
   });
 }
 addTask();

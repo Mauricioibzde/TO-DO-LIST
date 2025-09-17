@@ -1,3 +1,7 @@
+input {
+  width: min-content;
+}
+
 
 
 body {
@@ -88,7 +92,7 @@ header {
 
        background-color:var(--low-gray) ;
         border-radius: 1rem;
-         padding: 1.5rem;
+         
          border: none;
     }
       & textarea {
@@ -127,8 +131,11 @@ header {
 }
 
 #date {
-    width: 4rem;
+ 
+    width: 10rem;
       height: 4rem;
+      padding-inline: 1rem;
+      text-align: end;
 }
 
 

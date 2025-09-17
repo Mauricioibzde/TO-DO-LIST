@@ -71,14 +71,7 @@ textarea::placeholder {
 
 /* Input date com ícone */
 input[type="date"] {
-    position: relative;
-    background: url("../assets/icon/017-calendar.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  
-    font-size: 16px;
-    cursor: pointer;
+
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
 
