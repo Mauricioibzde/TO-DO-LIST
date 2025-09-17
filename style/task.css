@@ -30,6 +30,10 @@
   background-color: #888;
 }
 
+.input-add-task {
+  text-align: center;
+}
+
 /* ===============================
    Itens da lista
    =============================== */
@@ -175,6 +179,10 @@
   border: none;
   color: white;
   cursor: pointer;
+
+  & img {
+    width: 2rem;
+  }
 }
 
 .menu-editing-save-delete button:nth-child(1) { justify-self: flex-start; }

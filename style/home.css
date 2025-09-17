@@ -24,6 +24,13 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    width: 4rem;
+  }
 
       max-width: 400px;
     
@@ -88,12 +95,12 @@ header {
       width: 100%;
       color: #ffffff;
         
-         border: 2px solid var(--low-gray);
+       border: 2px solid #ffffff30;
 
        background-color:var(--low-gray) ;
         border-radius: 1rem;
          
-         border: none;
+        
     }
       & textarea {
         height: 6rem;
@@ -101,7 +108,7 @@ header {
       
         padding: 1.5rem;
         background-color:var(--low-gray);
-        border: none;
+        border: 2px solid #ffffff30;
         resize: none; color: #ffffff;
        
         

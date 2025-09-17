@@ -167,7 +167,7 @@ function addTask() {
     const btnDescription = document.createElement("button");
     btnDescription.classList.add("btn-description");
     const btnImg = document.createElement("img");
-    btnImg.src = "assets/icon/011-copywriting.png";
+    btnImg.src = "assets/icon/023-copywriting.png";
     btnDescription.appendChild(btnImg);
 
     checkboxDiv.append(checkboxInput, pTitle, btnDescription);
@@ -195,20 +195,24 @@ function addTask() {
 
     const btnEdit = document.createElement("button");
     const editIcon = document.createElement("img");
-    editIcon.src = "assets/icon/edit.png";
+    editIcon.src = "assets/icon/041-notebook.png";
     btnEdit.appendChild(editIcon);
+    
 
-    const btnSave = document.createElement("button");
+    // btn salvar edicao
+
+
+    /*const btnSave = document.createElement("button");
     const saveIcon = document.createElement("img");
     saveIcon.src = "assets/icon/save.png";
-    btnSave.appendChild(saveIcon);
+    btnSave.appendChild(saveIcon);*/
 
     const btnDelete = document.createElement("button");
     const deleteIcon = document.createElement("img");
-    deleteIcon.src = "assets/icon/delete.png";
+    deleteIcon.src = "assets/icon/048-trash can.png";
     btnDelete.appendChild(deleteIcon);
 
-    menuDiv.append(btnEdit, btnSave, btnDelete);
+    menuDiv.append(btnEdit, btnDelete);
 
     // -----------------------------
     // Monta o li completo

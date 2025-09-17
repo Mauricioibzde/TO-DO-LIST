@@ -16,7 +16,7 @@
     --gray-color: #292929;
     --background-color: #ffffff;
     --background-gradiente: linear-gradient(180deg, #292929 0%, rgba(10, 10, 10, 1) 100%);
-    --background-gradiente-js: linear-gradient(180deg, #121212 0%, rgba(10, 10, 10, 1) 100%);
+    --background-gradiente-js: linear-gradient(180deg, #160031 0%, rgba(10, 10, 10, 1) 100%);
 
     /* Fonts */
     --font-merriweather: "Merriweather", serif;
@@ -29,7 +29,7 @@
 
 
            --background-color:#ffffff;
-       --low-gray:#272626;
+       --low-gray:#27262650;
        --border-color:#8758ff;
 
 /* Fontes principais */

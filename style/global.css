@@ -5,6 +5,10 @@
  
 }
 
+p {
+   font-family: var(  --font-crimson);
+}
+
 input, textarea {
     width: 100%;
 }
