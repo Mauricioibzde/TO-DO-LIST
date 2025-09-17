@@ -34,9 +34,7 @@
    Itens da lista
    =============================== */
 #liste-of-the-aplication li {
-  display: grid;
-  gap: 0.5rem;
-  background-color: #1a1a1a;
+  background-color: var(--low-gray);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -176,7 +174,7 @@
    Background quando marcado
    =============================== */
 .background-list-checked {
-  background-color: #232323;
+  background-color:var(--low-gray);
 }
 
 /* ===============================

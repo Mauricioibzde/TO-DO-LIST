@@ -1,20 +1,4 @@
 
-:root {
-       --background-color:#ffffff;
-       --low-gray:#272626;
-       --border-color:#8758ff;
-
-/* Fontes principais */
-  --font-bebas: "Bebas Neue", sans-serif;
-  --font-bitter: "Bitter", serif;
-  --font-crimson: "Crimson Pro", serif;
-  --font-inter: "Inter", sans-serif;
-  --font-merriweather: "Merriweather", serif;
-  --font-opensans: "Open Sans", sans-serif;
-  --font-playfair: "Playfair Display", serif;
-  --font-storyscript: "Story Script", cursive;
-}
-
 
 body {
     background-color: var(--background-color);
