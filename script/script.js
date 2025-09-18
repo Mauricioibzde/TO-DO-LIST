@@ -72,53 +72,6 @@ function applyTaskStatus(task) {
 }
 
 // ======================================
-// Função para abrir/fechar descrição e menu de edição
-// ======================================
-function toggleDescription() {
-  const taskList = document.querySelector(".liste-of-the-aplication");
-
-  taskList.addEventListener("click", (event) => {
-    if (event.target.closest(".btn-description")) {
-      const task = event.target.closest("li");
-      const openDesc = task.querySelector(".open-description");
-      const menuDiv = task.querySelector(".menu-editing-save-delete");
-
-      openDesc.classList.toggle("active");
-      menuDiv.classList.toggle("active");
-    }
-  });
-}
-toggleDescription();
-
-// ======================================
-// Função para lidar com checkbox
-// ======================================
-function handleCheckbox() {
-  const taskList = document.querySelector("#liste-of-the-aplication");
-
-  taskList.addEventListener("click", (event) => {
-    if (event.target.classList.contains("checkbox")) {
-      const task = event.target.closest("li");
-      const statusDiv = task.querySelector(".checkbox-status-description");
-      const statusDateDiv = task.querySelector(".date");
-      const statusIcon = task.querySelector(".status-date img");
-
-      statusDiv.classList.toggle("background-list-checked");
-      statusDateDiv.classList.toggle("background-list-checked");
-
-      if (statusDiv.classList.contains("background-list-checked")) {
-        statusIcon.src = "assets/icon/Asset 4@2000x.png"; // ícone marcado
-      } else {
-        if (statusDiv.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
-        else if (statusDiv.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
-        else statusIcon.src = "assets/icon/Asset 9@2000x.png";
-      }
-    }
-  });
-}
-handleCheckbox();
-
-// ======================================
 // Função para adicionar nova task
 // ======================================
 function addTask() {
@@ -197,15 +150,6 @@ function addTask() {
     const editIcon = document.createElement("img");
     editIcon.src = "assets/icon/041-notebook.png";
     btnEdit.appendChild(editIcon);
-    
-
-    // btn salvar edicao
-
-
-    /*const btnSave = document.createElement("button");
-    const saveIcon = document.createElement("img");
-    saveIcon.src = "assets/icon/save.png";
-    btnSave.appendChild(saveIcon);*/
 
     const btnDelete = document.createElement("button");
     const deleteIcon = document.createElement("img");
@@ -233,24 +177,22 @@ function addTask() {
 }
 addTask();
 
-
-
-
+// ======================================
+// Sidebar toggle
+// ======================================
 function openSideBar() {
   const toogle = document.getElementById("checkbox")
   toogle.addEventListener("change",()=>{
     const openMenu = document.querySelector(".menu-sidebar")
     openMenu.classList.toggle("active")
-
     console.log("mudou")
   })
 }
-
 openSideBar()
 
-
-
-
+// ======================================
+// Mostrar todas as tarefas
+// ======================================
 function showAllTheTask () {
   let btn_show_all_the_task = document.getElementById("nav-add-task-btn");
 
@@ -264,7 +206,7 @@ function showAllTheTask () {
     // Limpa a UL do "Show-all-the-task"
     allTaskOnTheList.innerHTML = "";
 
-    // Clona a lista de tarefas
+    // Clona a lista de tarefas (apenas HTML, sem listeners)
     const clonedList = taskList.cloneNode(true);
     allTaskOnTheList.appendChild(clonedList);
 
@@ -275,5 +217,45 @@ function showAllTheTask () {
     console.log("Lista clonada para a seção 'All the Task'");
   });
 }
-
 showAllTheTask();
+
+// ======================================
+// Delegação de eventos global
+// ======================================
+document.addEventListener("click", (event) => {
+  // ✅ Checkboxes
+  if (event.target.classList.contains("checkbox")) {
+    const task = event.target.closest("li");
+    const statusDiv = task.querySelector(".checkbox-status-description");
+    const statusDateDiv = task.querySelector(".date");
+    const statusIcon = task.querySelector(".status-date img");
+
+    statusDiv.classList.toggle("background-list-checked");
+    statusDateDiv.classList.toggle("background-list-checked");
+
+    if (statusDiv.classList.contains("background-list-checked")) {
+      statusIcon.src = "assets/icon/Asset 4@2000x.png"; // marcado
+    } else {
+      if (statusDiv.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
+      else if (statusDiv.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
+      else statusIcon.src = "assets/icon/Asset 9@2000x.png";
+    }
+  }
+
+  // ✅ Botão descrição
+  if (event.target.closest(".btn-description")) {
+    const task = event.target.closest("li");
+    const openDesc = task.querySelector(".open-description");
+    const menuDiv = task.querySelector(".menu-editing-save-delete");
+
+    openDesc.classList.toggle("active");
+    menuDiv.classList.toggle("active");
+  }
+
+  // ✅ Botão excluir
+  if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
+    const task = event.target.closest("li");
+    task.remove();
+    console.log("Tarefa excluída!");
+  }
+});
