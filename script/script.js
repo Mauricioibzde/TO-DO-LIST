@@ -4,10 +4,6 @@
 const inputAddTask = document.querySelector(".input-add-task"); // Input do título da task
 const inputDate = document.getElementById("date");              // Input de data
 const descriptionOfTask = document.querySelector(".add-description"); // Textarea da descrição
-const btnAddTask = document.querySelector("#btn-add-task");     // Botão principal
-
-// Variável global para controlar se estamos editando alguma tarefa
-let taskBeingEdited = null;
 
 // ======================================
 // Função para setar a data atual no input
@@ -123,65 +119,13 @@ function handleCheckbox() {
 handleCheckbox();
 
 // ======================================
-// Função para capturar clique no botão editar
-// ======================================
-function handleEditTask() {
-  const taskList = document.querySelector("#liste-of-the-aplication");
-
-  taskList.addEventListener("click", (event) => {
-    if (event.target.closest("button")?.querySelector("img")?.src.includes("041-notebook")) {
-      const task = event.target.closest("li");
-
-      // Pega os valores atuais da tarefa
-      const title = task.querySelector(".checkbox-status-description p").textContent;
-      const desc = task.querySelector(".show-description p").textContent;
-      const date = task.querySelector(".date span").textContent;
-
-      // Joga os valores nos inputs
-      inputAddTask.value = title;
-      descriptionOfTask.value = desc;
-      inputDate.value = date;
-
-      // Marca qual tarefa será editada
-      taskBeingEdited = task;
-
-      // Muda texto do botão para "Salvar edição"
-      btnAddTask.textContent = "Salvar edição";
-    }
-  });
-}
-handleEditTask();
-
-// ======================================
-// Função para adicionar ou atualizar tarefa
+// Função para adicionar nova task
 // ======================================
 function addTask() {
+  const btnAddTask = document.querySelector("#btn-add-task");
+
   btnAddTask.addEventListener("click", () => {
     const listOfTasks = document.getElementById("liste-of-the-aplication");
-
-    // Caso seja edição de uma tarefa existente
-    if (taskBeingEdited) {
-      taskBeingEdited.querySelector(".checkbox-status-description p").textContent = inputAddTask.value;
-      taskBeingEdited.querySelector(".show-description p").textContent = descriptionOfTask.value;
-      taskBeingEdited.querySelector(".date span").textContent = inputDate.value;
-
-      // Reaplica status da data para cores/ícones corretos
-      applyTaskStatus(taskBeingEdited);
-
-      console.log("Tarefa editada!");
-
-      // Limpa inputs e reseta estado de edição
-      inputAddTask.value = "";
-      descriptionOfTask.value = "";
-      setTodayAsValue();
-      taskBeingEdited = null;
-
-      // Volta o botão para "Adicionar"
-      btnAddTask.textContent = "Adicionar";
-      return;
-    }
-
-    // Caso seja uma nova tarefa
     const newTask = document.createElement("li");
 
     // -----------------------------
@@ -195,6 +139,7 @@ function addTask() {
     dateDiv.classList.add("date");
 
     const spanDate = document.createElement("span");
+    // Exibe a data atual se o input estiver vazio
     spanDate.textContent = inputDate.value || new Date().toISOString().split("T")[0];
 
     const spanImg = document.createElement("span");
@@ -243,7 +188,7 @@ function addTask() {
     openDescDiv.appendChild(showDescDiv);
 
     // -----------------------------
-    // Menu de edição (ícones)
+    // Menu de edição (apenas ícones)
     // -----------------------------
     const menuDiv = document.createElement("div");
     menuDiv.classList.add("menu-editing-save-delete");
@@ -252,6 +197,15 @@ function addTask() {
     const editIcon = document.createElement("img");
     editIcon.src = "assets/icon/041-notebook.png";
     btnEdit.appendChild(editIcon);
+    
+
+    // btn salvar edicao
+
+
+    /*const btnSave = document.createElement("button");
+    const saveIcon = document.createElement("img");
+    saveIcon.src = "assets/icon/save.png";
+    btnSave.appendChild(saveIcon);*/
 
     const btnDelete = document.createElement("button");
     const deleteIcon = document.createElement("img");
@@ -274,7 +228,19 @@ function addTask() {
     // Limpa inputs após adicionar
     inputAddTask.value = "";
     descriptionOfTask.value = "";
-    setTodayAsValue();
+    setTodayAsValue(); // Reinsere a data atual no input
   });
 }
 addTask();
+
+
+
+
+function openSideBar() {
+  const toogle = document.getElementById("checkbox")
+  toogle.addEventListener("change",()=>{
+    console.log("mudou")
+  })
+}
+
+openSideBar()
