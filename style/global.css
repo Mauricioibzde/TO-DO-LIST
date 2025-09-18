@@ -5,6 +5,9 @@
  
 }
 
+li {
+  list-style: none;
+}
 .menu-content {
 display: grid;
 gap: 1rem;
@@ -36,6 +39,17 @@ nav {
 }
 }
 
+.menu-principal {
+  z-index: 2;
+}
+
+.all-the-liste {
+
+ gap: .7rem;
+ max-height: 700px;
+ overflow-y: auto;
+}
+
 
 
 nav.active {
@@ -44,6 +58,24 @@ nav.active {
   transform: translateX(0);
 
 }
+
+
+.Hero {
+  height: 100dvh;
+}
+
+.Hero.active {
+
+}
+
+.Show-all-the-task {
+ display: none;
+  
+}
+.Show-all-the-task.active {
+  display: grid;
+}
+
 
 
 p {
@@ -68,13 +100,38 @@ input, textarea, select {
   font-size: 16px; /* mínimo para evitar zoom no iOS */
 }
 
-.hero {
- 
+.Hero {
+  padding-inline: 1rem;
 }
 
 
 
 .open-side {
 
+}
+
+
+.height-of-the-all-the-liste {
+  max-height: 700px !important;
+}
+
+.Show-all-the-task .task-liste {
+  padding-block: 5rem;
+}
+
+.Hero {
+  display: block;
+}
+
+.Show-all-the-task {
+  display: none;
+}
+
+.Hero.active {
+  display: none;
+}
+
+.Show-all-the-task.active {
+  display: block;
 }
 

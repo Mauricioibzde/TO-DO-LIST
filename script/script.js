@@ -75,7 +75,7 @@ function applyTaskStatus(task) {
 // Função para abrir/fechar descrição e menu de edição
 // ======================================
 function toggleDescription() {
-  const taskList = document.querySelector("#liste-of-the-aplication");
+  const taskList = document.querySelector(".liste-of-the-aplication");
 
   taskList.addEventListener("click", (event) => {
     if (event.target.closest(".btn-description")) {
@@ -247,3 +247,33 @@ function openSideBar() {
 }
 
 openSideBar()
+
+
+
+
+function showAllTheTask () {
+  let btn_show_all_the_task = document.getElementById("nav-add-task-btn");
+
+  btn_show_all_the_task.addEventListener("click", () => {
+    const heroPage = document.querySelector(".Hero");
+    const showAllSection = document.querySelector(".Show-all-the-task");
+    const allTaskOnTheList = document.querySelector(".all-the-liste");
+    const taskList = document.getElementById("liste-of-the-aplication");
+    taskList.classList.toggle("height-of-the-all-the-liste")
+
+    // Limpa a UL do "Show-all-the-task"
+    allTaskOnTheList.innerHTML = "";
+
+    // Clona a lista de tarefas
+    const clonedList = taskList.cloneNode(true);
+    allTaskOnTheList.appendChild(clonedList);
+
+    // Esconde Hero e mostra AllTasks
+    heroPage.classList.toggle("active");
+    showAllSection.classList.toggle("active");
+
+    console.log("Lista clonada para a seção 'All the Task'");
+  });
+}
+
+showAllTheTask();
