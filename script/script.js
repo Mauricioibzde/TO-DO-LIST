@@ -239,6 +239,9 @@ addTask();
 function openSideBar() {
   const toogle = document.getElementById("checkbox")
   toogle.addEventListener("change",()=>{
+    const openMenu = document.querySelector(".menu-sidebar")
+    openMenu.classList.toggle("active")
+
     console.log("mudou")
   })
 }

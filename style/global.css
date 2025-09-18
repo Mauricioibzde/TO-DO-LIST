@@ -5,6 +5,47 @@
  
 }
 
+.menu-content {
+display: grid;
+gap: 1rem;
+}
+
+nav {
+  width: 20rem;
+  height: 100%;
+  background-color: var(--gray-color);
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  padding: 1rem;
+  transform: translateX(-40rem);
+  max-height: 0;      /* fechado inicialmente */
+  opacity: 0;
+  overflow: hidden;   /* esconde conteúdo extra */
+  transition: all 0.4s ease; 
+  border-radius: 0 0 1rem 0;
+  & a {
+   position: relative;
+   top: 10rem;
+   text-decoration: none;
+   font-family: var(  --font-crimson);
+   color: white;
+  
+  
+}
+}
+
+
+
+nav.active {
+  max-height: 500px; /* altura suficiente para o conteúdo */
+  opacity: 1;
+  transform: translateX(0);
+
+}
+
+
 p {
    font-family: var(  --font-crimson);
 }
