@@ -6,8 +6,11 @@ input {
 
 body {
     background-color: var(--background-color);
-  
-   
+     
+}
+
+.menu-principal {
+  position: absolute;
 }
 
 .title {
