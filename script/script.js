@@ -1,12 +1,12 @@
 // ======================================
 // Seletores globais
 // ======================================
-const inputAddTask = document.querySelector(".input-add-task");
-const inputDate = document.getElementById("date");
-const descriptionOfTask = document.querySelector(".add-description");
-const deletedTaskList = document.querySelector(".deleted-task-list");
-const doneTaskList = document.querySelector(".liste-of-the-aplication-task-done");
-const successMessage = document.getElementById("success-message");
+const inputAddTask = document.querySelector(".input-add-task"); // Input título
+const inputDate = document.getElementById("date");              // Input data
+const descriptionOfTask = document.querySelector(".add-description"); // Textarea descrição
+const deletedTaskList = document.querySelector(".deleted-task-list"); // Lista de tasks deletadas
+const doneTaskList = document.querySelector(".liste-of-the-aplication-task-done"); // Lista de tasks concluídas
+const successMessage = document.getElementById("success-message"); // Mensagem de status
 
 // ======================================
 // Função para setar a data atual no input
@@ -18,8 +18,8 @@ function setTodayAsValue() {
   const dd = String(today.getDate()).padStart(2, "0");
   const todayStr = `${yyyy}-${mm}-${dd}`;
 
-  inputDate.setAttribute("min", todayStr);
-  inputDate.value = todayStr;
+  inputDate.setAttribute("min", todayStr); // Impede datas passadas
+  inputDate.value = todayStr;              // Valor inicial = hoje
 }
 setTodayAsValue();
 
@@ -40,27 +40,29 @@ function applyTaskStatus(task) {
 
   const diffDays = Math.ceil((dueDate - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / (1000 * 60 * 60 * 24));
 
+  // Remove classes de status anteriores
   statusDiv.classList.remove("status-red", "status-yellow", "status-green");
   statusDateDiv.classList.remove("status-red", "status-yellow", "status-green");
 
+  // Define status visual
   if (diffDays < 0) {
     statusDiv.classList.add("status-red");
     statusDateDiv.classList.add("status-red");
     descriptionDiv.classList.add("status-red-dark");
     menuDiv.classList.add("status-red-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 2@2000x.png";
+    statusIcon.src = "assets/icon/Asset 2@2000x.png"; // Atrasada
   } else if (diffDays <= 3) {
     statusDiv.classList.add("status-yellow");
     statusDateDiv.classList.add("status-yellow");
     descriptionDiv.classList.add("status-yellow-dark");
     menuDiv.classList.add("status-yellow-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 10@2000x.png";
+    statusIcon.src = "assets/icon/Asset 10@2000x.png"; // Prazo curto
   } else {
     statusDiv.classList.add("status-green");
     statusDateDiv.classList.add("status-green");
     descriptionDiv.classList.add("status-green-dark");
     menuDiv.classList.add("status-green-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 9@2000x.png";
+    statusIcon.src = "assets/icon/Asset 9@2000x.png"; // Ok
   }
 }
 
@@ -74,7 +76,9 @@ function addTask() {
     const listOfTasks = document.querySelector(".liste-of-the-aplication");
     const newTask = document.createElement("li");
 
+    // --------------------------
     // Status + data
+    // --------------------------
     const statusDiv = document.createElement("div");
     const statusDateWrapper = document.createElement("div");
     statusDateWrapper.classList.add("status-date");
@@ -94,7 +98,9 @@ function addTask() {
     statusDateWrapper.appendChild(dateDiv);
     statusDiv.appendChild(statusDateWrapper);
 
-    // Checkbox + título + botão descrição
+    // --------------------------
+    // Checkbox + título + descrição
+    // --------------------------
     const checkboxDiv = document.createElement("div");
     checkboxDiv.classList.add("checkbox-status-description");
 
@@ -113,7 +119,9 @@ function addTask() {
 
     checkboxDiv.append(checkboxInput, pTitle, btnDescription);
 
-    // Descrição
+    // --------------------------
+    // Descrição da task
+    // --------------------------
     const openDescDiv = document.createElement("div");
     openDescDiv.classList.add("open-description", "display-none");
 
@@ -126,7 +134,9 @@ function addTask() {
     showDescDiv.appendChild(pDesc);
     openDescDiv.appendChild(showDescDiv);
 
+    // --------------------------
     // Menu edição (editar/deletar)
+    // --------------------------
     const menuDiv = document.createElement("div");
     menuDiv.classList.add("menu-editing-save-delete");
 
@@ -142,11 +152,13 @@ function addTask() {
 
     menuDiv.append(btnEdit, btnDelete);
 
-    // Monta a task
+    // --------------------------
+    // Monta a task final
+    // --------------------------
     newTask.append(statusDiv, checkboxDiv, openDescDiv, menuDiv);
     listOfTasks.appendChild(newTask);
 
-    // Aplica status visual
+    // Aplica cores/status
     applyTaskStatus(newTask);
 
     // Limpa inputs
@@ -178,12 +190,16 @@ function openSideBar() {
 openSideBar();
 
 // ======================================
-// Delegação de eventos
+// Delegação de eventos (checkbox, descrição, deletar)
 // ======================================
 document.addEventListener("click", (event) => {
   const task = event.target.closest("li");
 
-  // Marcar/desmarcar checkbox → move para "done" se marcado
+  if (!task) return;
+
+  // --------------------------
+  // Marcar/desmarcar checkbox → move para "done"
+  // --------------------------
   if (event.target.classList.contains("checkbox")) {
     const statusDiv = task.querySelector(".checkbox-status-description");
     const statusDateDiv = task.querySelector(".date");
@@ -195,33 +211,35 @@ document.addEventListener("click", (event) => {
     if (statusDiv.classList.contains("background-list-checked")) {
       statusIcon.src = "assets/icon/Asset 4@2000x.png";
 
-      // Mover task concluída para a lista de done
+      // Move para lista de tasks concluídas
       doneTaskList.appendChild(task);
       statusMenssagen("Task marked as done!");
     } else {
-      // Retorna para a lista principal se desmarcada
+      // Retorna para lista principal
       document.querySelector(".liste-of-the-aplication").appendChild(task);
-      applyTaskStatus(task); // Reaplica cor/status
+      applyTaskStatus(task); // Reaplica cores/status
       statusMenssagen("Task unmarked!");
     }
   }
 
+  // --------------------------
   // Expandir/retrair descrição
+  // --------------------------
   if (event.target.closest(".btn-description")) {
     const openDesc = task.querySelector(".open-description");
     const menuDiv = task.querySelector(".menu-editing-save-delete");
-
     openDesc.classList.toggle("active");
     menuDiv.classList.toggle("active");
   }
 
+  // --------------------------
   // Deletar task
+  // --------------------------
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
     if (task.parentElement.classList.contains("liste-of-the-aplication") ||
         task.parentElement.classList.contains("liste-of-the-aplication-task-done")) {
       task.parentElement.removeChild(task);
     }
-
     deletedTaskList.appendChild(task);
     statusMenssagen("Task moved to Deleted Tasks!");
   }
@@ -241,19 +259,12 @@ function showPage(selector) {
   page.style.display = selector === ".Hero" ? "grid" : "block";
   page.classList.add("active");
   closeSidebar();
-
-  if (selector === ".Show-all-the-task") {
-    const taskList = document.querySelector(".liste-of-the-aplication");
-    const allTaskOnTheList = document.querySelector(".all-the-liste");
-    allTaskOnTheList.innerHTML = "";
-    const clonedList = taskList.cloneNode(true);
-    allTaskOnTheList.appendChild(clonedList);
-  }
 }
 
 document.querySelector(".btn-add-task-side-bar").addEventListener("click", () => showPage(".Hero"));
 document.querySelector(".nav-add-task-btn").addEventListener("click", () => showPage(".Show-all-the-task"));
 document.querySelector(".deleted-task").addEventListener("click", () => showPage(".Show-all-the-task-deleted"));
+document.querySelector(".task-done").addEventListener("click", () => showPage(".Show-all-the-task-done"));
 
 // ======================================
 // Mensagem de status
