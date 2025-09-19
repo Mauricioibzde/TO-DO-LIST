@@ -82,7 +82,7 @@ header {
     gap: 1rem;
 
     & .status-error-menssagem {
-      padding:1rem ;
+        height: 3rem;
         color: white;
         font-family: var(--font-bitter);
         justify-self: center;

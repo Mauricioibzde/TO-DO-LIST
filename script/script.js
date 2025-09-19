@@ -5,6 +5,8 @@ const inputAddTask = document.querySelector(".input-add-task");       // Input t
 const inputDate = document.getElementById("date");                    // Input de data
 const descriptionOfTask = document.querySelector(".add-description"); // Textarea descrição
 const deletedTaskList = document.querySelector(".deleted-task-list"); // UL das tarefas deletadas
+const successMessage = document.getElementById("success-message");    // Mensagem de sucesso
+
 
 // ======================================
 // Função para setar a data atual no input
@@ -34,14 +36,13 @@ function applyTaskStatus(task) {
   const menuDiv = task.querySelector(".menu-editing-save-delete");
   const statusIcon = task.querySelector(".status-date img");
 
-  // Pega data da task
   let inputValue = inputDate.value || `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
   const [yyyy, mm, dd] = inputValue.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
 
   const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
 
-  // Reseta classes
+  // Remove classes anteriores
   statusDiv.classList.remove("status-red", "status-yellow", "status-green");
   statusDateDiv.classList.remove("status-red", "status-yellow", "status-green");
 
@@ -162,10 +163,25 @@ function addTask() {
     // Aplica status visual
     applyTaskStatus(newTask);
 
+    // =============================
+    // Mensagem de sucesso
+    // =============================
+    // Mostra a mensagem
+  
+
+    // Reinicia timeout caso o usuário adicione várias tarefas rapidamente
+
+
+    // =============================
     // Limpa inputs
+    // =============================
     inputAddTask.value = "";
     descriptionOfTask.value = "";
     setTodayAsValue();
+
+
+
+    statusMenssagen()
   });
 }
 addTask();
@@ -255,7 +271,11 @@ function showAllTheTask() {
     showAllSection.style.display = "block";
 
     // Clona lista principal para exibir
-   
+    const taskList = document.querySelector(".liste-of-the-aplication");
+    const allTaskOnTheList = document.querySelector(".all-the-liste");
+    allTaskOnTheList.innerHTML = "";
+    const clonedList = taskList.cloneNode(true);
+    allTaskOnTheList.appendChild(clonedList);
 
     closeSidebar();
   });
@@ -291,3 +311,22 @@ function showDeletedTaksPage() {
   });
 }
 showDeletedTaksPage();
+
+
+
+
+function statusMenssagen() {
+  // Texto original da mensagem
+ const originalText = "Add a task!";
+
+
+  // Mostra a mensagem de sucesso
+  successMessage.textContent = "Task added successfully! Add another task!";
+
+
+  // Depois de 3 segundos, volta para o texto original
+  setTimeout(() => {
+    successMessage.textContent = originalText;
+   
+  }, 3000);
+}

@@ -1,5 +1,5 @@
 .Show-all-the-task {
-  height: 100dvh;
+  min-height: 100dvh;
   padding-inline: 1rem;
   padding-bottom: 2rem;
 
