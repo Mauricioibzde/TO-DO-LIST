@@ -1,7 +1,10 @@
 .Show-all-the-task-deleted {
      height: 100dvh;
-  
-  display: none;
+    
+     display: none;
+    
+ 
+ 
 
   & header {
   display: grid;

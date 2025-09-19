@@ -17,8 +17,8 @@ function setTodayAsValue() {
   const dd = String(today.getDate()).padStart(2, "0");
 
   const todayStr = `${yyyy}-${mm}-${dd}`;
-  inputDate.setAttribute("min", todayStr); // Impede datas passadas
-  inputDate.value = todayStr;              // Valor inicial = hoje
+  inputDate.setAttribute("min", todayStr);
+  inputDate.value = todayStr;
 }
 setTodayAsValue();
 
@@ -35,36 +35,33 @@ function applyTaskStatus(task) {
   const menuDiv = task.querySelector(".menu-editing-save-delete");
   const statusIcon = task.querySelector(".status-date img");
 
-  // Pega data do input ou hoje, se vazio
   let inputValue = inputDate.value || `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
   const [yyyy, mm, dd] = inputValue.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
 
   const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
 
-  // Remove classes anteriores
   statusDiv.classList.remove("status-red", "status-yellow", "status-green");
   statusDateDiv.classList.remove("status-red", "status-yellow", "status-green");
 
-  // Define status visual
   if (diffDays < 0) {
     statusDiv.classList.add("status-red");
     statusDateDiv.classList.add("status-red");
     descriptionDiv.classList.add("status-red-dark");
     menuDiv.classList.add("status-red-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 2@2000x.png"; // atrasada
+    statusIcon.src = "assets/icon/Asset 2@2000x.png";
   } else if (diffDays <= 3) {
     statusDiv.classList.add("status-yellow");
     statusDateDiv.classList.add("status-yellow");
     descriptionDiv.classList.add("status-yellow-dark");
     menuDiv.classList.add("status-yellow-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 10@2000x.png"; // prazo curto
+    statusIcon.src = "assets/icon/Asset 10@2000x.png";
   } else {
     statusDiv.classList.add("status-green");
     statusDateDiv.classList.add("status-green");
     descriptionDiv.classList.add("status-green-dark");
     menuDiv.classList.add("status-green-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 9@2000x.png"; // ok
+    statusIcon.src = "assets/icon/Asset 9@2000x.png";
   }
 }
 
@@ -130,7 +127,7 @@ function addTask() {
     showDescDiv.appendChild(pDesc);
     openDescDiv.appendChild(showDescDiv);
 
-    // Menu de edição (editar/deletar)
+    // Menu edição (editar/deletar)
     const menuDiv = document.createElement("div");
     menuDiv.classList.add("menu-editing-save-delete");
 
@@ -146,7 +143,7 @@ function addTask() {
 
     menuDiv.append(btnEdit, btnDelete);
 
-    // Monta o li final
+    // Monta a task
     newTask.append(statusDiv, checkboxDiv, openDescDiv, menuDiv);
     listOfTasks.appendChild(newTask);
 
@@ -158,7 +155,7 @@ function addTask() {
     descriptionOfTask.value = "";
     setTodayAsValue();
 
-    // Mensagem de sucesso
+    // Feedback
     statusMenssagen("Task added successfully! Add another task!");
   });
 }
@@ -170,24 +167,22 @@ addTask();
 function closeSidebar() {
   const toggle = document.getElementById("checkbox");
   toggle.checked = false;
-  const openMenu = document.querySelector(".menu-sidebar");
-  openMenu.classList.remove("active");
+  document.querySelector(".menu-sidebar").classList.remove("active");
 }
 
 function openSideBar() {
   const toggle = document.getElementById("checkbox");
   toggle.addEventListener("change", () => {
-    const openMenu = document.querySelector(".menu-sidebar");
-    openMenu.classList.toggle("active");
+    document.querySelector(".menu-sidebar").classList.toggle("active");
   });
 }
 openSideBar();
 
 // ======================================
-// Delegação de eventos (checkbox, descrição, deletar)
+// Delegação de eventos
 // ======================================
 document.addEventListener("click", (event) => {
-  // Marcar/desmarcar checkbox
+  // Checkbox
   if (event.target.classList.contains("checkbox")) {
     const task = event.target.closest("li");
     const statusDiv = task.querySelector(".checkbox-status-description");
@@ -198,7 +193,7 @@ document.addEventListener("click", (event) => {
     statusDateDiv.classList.toggle("background-list-checked");
 
     if (statusDiv.classList.contains("background-list-checked")) {
-      statusIcon.src = "assets/icon/Asset 4@2000x.png"; // marcado
+      statusIcon.src = "assets/icon/Asset 4@2000x.png";
     } else {
       if (statusDiv.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
       else if (statusDiv.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
@@ -206,7 +201,7 @@ document.addEventListener("click", (event) => {
     }
   }
 
-  // Botão de descrição → expandir/retrair
+  // Expandir descrição
   if (event.target.closest(".btn-description")) {
     const task = event.target.closest("li");
     const openDesc = task.querySelector(".open-description");
@@ -216,36 +211,37 @@ document.addEventListener("click", (event) => {
     menuDiv.classList.toggle("active");
   }
 
-  // Botão deletar → mover para lista de deletados
+  // Deletar task
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
     const task = event.target.closest("li");
-    deletedTaskList.appendChild(task); // move para lista de deletados
 
-    // Mensagem de feedback ao excluir
+    // Remove da lista principal, se estiver nela
+    if (task.parentElement.classList.contains("liste-of-the-aplication")) {
+      task.parentElement.removeChild(task);
+    }
+
+    // Move para deletados
+    deletedTaskList.appendChild(task);
+
     statusMenssagen("Task moved to Deleted Tasks!");
   }
 });
 
 // ======================================
-// Controle de páginas centralizado
+// Controle de páginas
 // ======================================
 function showPage(selector) {
-  // Esconde todas as páginas
   document.querySelectorAll(".Hero, .Show-all-the-task, .Show-all-the-task-deleted")
-          .forEach(page => {
-            page.style.display = "none";
-            page.classList.remove("active");
-          });
+    .forEach(page => {
+      page.style.display = "none";
+      page.classList.remove("active");
+    });
 
-  // Mostra a página selecionada
   const page = document.querySelector(selector);
   page.style.display = selector === ".Hero" ? "grid" : "block";
   page.classList.add("active");
-
-  // Fecha a sidebar
   closeSidebar();
 
-  // Se for página "All tasks", clona lista principal
   if (selector === ".Show-all-the-task") {
     const taskList = document.querySelector(".liste-of-the-aplication");
     const allTaskOnTheList = document.querySelector(".all-the-liste");
@@ -255,13 +251,12 @@ function showPage(selector) {
   }
 }
 
-// Eventos dos botões da sidebar
 document.querySelector(".btn-add-task-side-bar").addEventListener("click", () => showPage(".Hero"));
 document.querySelector(".nav-add-task-btn").addEventListener("click", () => showPage(".Show-all-the-task"));
 document.querySelector(".deleted-task").addEventListener("click", () => showPage(".Show-all-the-task-deleted"));
 
 // ======================================
-// Mensagem de status (centralizada)
+// Mensagem de status
 // ======================================
 function statusMenssagen(message) {
   const originalText = "Add a task!";

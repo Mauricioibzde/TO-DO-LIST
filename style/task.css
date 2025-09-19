@@ -2,17 +2,19 @@
    Lista de tarefas
    =============================== */
 
-   .task-liste {
-    display: none;
-     border: solid 1px white;
-   }
+.task-liste {
+ 
+  padding-inline: 2rem;
+    max-height: 500px;
+  overflow-y: auto;
+}
 
 .liste-of-the-aplication.active
 
 .liste-of-the-aplication {
   margin: 0 auto;
   max-width: 600px;
-  max-height: 495px;
+  max-height: 500px;
   overflow-y: auto;
   display: grid;
   gap: 1rem;
