@@ -2,6 +2,7 @@
   min-height: 100dvh;
   padding-inline: 1rem;
   padding-bottom: 2rem;
+  display: none;
  
 
  & header {
@@ -31,4 +32,14 @@
     align-items: center;
    }
 }
+
+
+.liste-of-the-aplication-task-done {
+  display: grid;
+  gap: 1rem;
+}
+
     }
+
+
+

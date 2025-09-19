@@ -1,199 +1,200 @@
+/* ---------------------- */
+/* ELEMENTOS GERAIS       */
+/* ---------------------- */
+body {
+  background-color: var(--background-color);
+}
+
 input {
   width: min-content;
 }
 
-
-
-body {
-    background-color: var(--background-color);
-     
-}
-
-.menu-principal {
-  position: absolute;
-}
-
-.title {
-    display: flex;
-    justify-content: center;
-    & h1{
-       
-
-
-
-        
-       
-    }
-}
-
+/* ---------------------- */
+/* CABEÇALHO (HEADER)     */
+/* ---------------------- */
 header {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  & img {
-    width: 4rem;
-  }
-
-   
-    
-      padding: 1rem;
-       
-        & button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-        
-        & img {
-            width: 2rem;
-        }
-    }
-  nav {
-    display: grid;
-    background-color:var(--low-gray) ;
-    max-width: 400px;
-    border-radius: 0 1rem 1rem 0;
-    gap: 1rem;
-    padding: 1rem;
-    overflow: hidden;   /* esconde conteúdo extra */
-    transition: all 0.4s ease; /* suavização */
-
-   
-   
-    & a {
-        text-decoration: none;
-      
-    }
-    
-}
+  padding: 1rem;
 }
 
+header img {
+  width: 4rem;
+}
 
+header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+header button img {
+  width: 2rem;
+}
+
+/* Menu dentro do header */
+header nav {
+  display: grid;
+  background-color: var(--low-gray);
+  max-width: 400px;
+  border-radius: 0 1rem 1rem 0;
+  gap: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+header nav a {
+  text-decoration: none;
+}
+
+/* ---------------------- */
+/* TÍTULO                 */
+/* ---------------------- */
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.title h1 {
+  /* reservado p/ estilização futura */
+}
+
+/* ---------------------- */
+/* MENU PRINCIPAL         */
+/* ---------------------- */
+.menu-principal {
+  position: absolute;
+}
+
+/* ---------------------- */
+/* MENU DE ADICIONAR TASK */
+/* ---------------------- */
 .menu-add-task {
-  
-    max-width: 600px;
-    display: grid;
-  
-    margin: 0 auto;
-     text-align: center;
-    gap: 1rem;
-
-    & .status-error-menssagem {
-        height: 3rem;
-        color: white;
-        font-family: var(--font-bitter);
-        justify-self: center;
-    }
-
-    & div {
-    display: flex;
-      
-      gap: 1rem;
-    }
-
-    & input {
-      width: 100%;
-      height: 4rem;
-      color: #ffffff;
-        
-       border: 2px solid #ffffff30;
-
-       background-color:var(--low-gray) ;
-        border-radius: 1rem;
-         
-        
-    }
-      & textarea {
-        height: 5rem;
-        border-radius: 1rem;
-      
-        padding: 1.5rem;
-        background-color:var(--low-gray);
-        border: 2px solid #ffffff30;
-        resize: none; color: #ffffff;
-       
-        
-    }
-
-    & input:focus {
-        border: 2px solid var( --border-color);    /* borda vermelha */
-        outline: none;   
-    }
-
-  textarea:focus {
-   
-    border: 2px solid var( --border-color);    /* borda vermelha */
-    outline: none;        
+  max-width: 600px;
+  display: grid;
+  margin: 0 auto;
+  text-align: center;
+  gap: 1rem;
 }
 
-
-
-    & button {
-        margin: 0 auto;
-        width: 8rem;
-        height: 3rem;
-        border-radius: 1rem;
-        border: none;
-        cursor: pointer;
-    }
+/* Mensagem de erro */
+.menu-add-task .status-error-menssagem {
+  height: 3rem;
+  color: white;
+  font-family: var(--font-bitter);
+  justify-self: center;
 }
 
+/* Linha de inputs */
+.menu-add-task div {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Inputs */
+.menu-add-task input {
+  width: 100%;
+  height: 4rem;
+  color: #ffffff;
+  border: 2px solid #ffffff30;
+  background-color: var(--low-gray);
+  border-radius: 1rem;
+}
+
+.menu-add-task input:focus {
+  border: 2px solid var(--border-color);
+  outline: none;
+}
+
+/* Textarea */
+.menu-add-task textarea {
+  height: 5rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: var(--low-gray);
+  border: 2px solid #ffffff30;
+  resize: none;
+  color: #ffffff;
+}
+
+.menu-add-task textarea:focus {
+  border: 2px solid var(--border-color);
+  outline: none;
+}
+
+/* Botão */
+.menu-add-task button {
+  margin: 0 auto;
+  width: 8rem;
+  height: 3rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* Campo de data */
 #date {
- 
-    width: 10rem;
-      height: 4rem;
-      padding-inline: 1rem;
-      text-align: end;
+  width: 10rem;
+  height: 4rem;
+  padding-inline: 1rem;
+  text-align: end;
 }
 
-
-
+/* ---------------------- */
+/* MENU LATERAL (SIDEBAR) */
+/* ---------------------- */
 .menu-side-bar {
   width: 500px;
   position: absolute;
+
+  /* Estado inicial (fechado) */
   transform: translateX(-40rem);
-  max-height: 0;      /* fechado inicialmente */
+  max-height: 0;
   opacity: 0;
-  overflow: hidden;   /* esconde conteúdo extra */
-  transition: all 0.4s ease; /* suavização */
-  
-  
+  overflow: hidden;
+  transition: all 0.4s ease;
 }
+
+/* Estado ativo (aberto) */
 .menu-side-bar.active {
-  max-height: 500px; /* altura suficiente para o conteúdo */
+  max-height: 500px;
   opacity: 1;
   transform: translateX(0);
-  
 }
 
+/* ---------------------- */
+/* SEÇÃO HERO             */
+/* ---------------------- */
 .Hero {
-   height: 100dvh;
+  height: 100dvh;
   padding-inline: 1rem;
+}
 
-  & header {
+/* Header dentro da Hero */
+.Hero header {
   display: grid;
- 
   justify-content: center;
   align-items: center;
-  
   height: max-content;
-
-   & div:nth-child(1) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-
-    & img {
-        width: 3rem;
-    }
-    
-   }
-
-     & div:nth-child(2) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   }
 }
+
+/* Primeiro bloco do header da Hero */
+.Hero header div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.Hero header div:nth-child(1) img {
+  width: 3rem;
+}
+
+/* Segundo bloco do header da Hero */
+.Hero header div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
