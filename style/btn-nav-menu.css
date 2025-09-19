@@ -3,7 +3,7 @@
   font-size: 16px; /* mínimo 16px para não disparar zoom em iOS/Android */
 }
 
-.btn-add-new-task,  .btn-add-task-side-bar ,  .deleted-task , .nav-add-task-btn {
+.btn-add-new-task,  .btn-add-task-side-bar ,  .deleted-task , .nav-add-task-btn, .task-done {
    border-radius: 1rem;
 }
 
@@ -57,6 +57,23 @@
          padding-inline: .5rem;
 
           & img {
+            width: 1.5rem;
+            
+        }
+ }
+
+
+  .task-done  {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: .5rem;
+        width: 10rem;
+        height: 3rem;
+       
+        padding-inline: .5rem;
+
+        & img {
             width: 1.5rem;
             
         }
