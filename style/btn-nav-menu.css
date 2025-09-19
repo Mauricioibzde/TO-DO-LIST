@@ -79,4 +79,17 @@
         }
  }
 
+ .btn-add-task-hero {
+    margin: 0 auto;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    color:black ;
+    cursor: pointer;
+ }
+
 

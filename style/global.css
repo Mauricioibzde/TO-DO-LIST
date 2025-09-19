@@ -40,54 +40,7 @@ h1 {
   text-align: center;
 }
 
-/* ---------------------- */
-/* MENU LATERAL (SIDEBAR) */
-/* ---------------------- */
-nav {
-  width: 15rem;
-  height: 100%;
-  background-color: var(--gray-color);
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  position: absolute;
-  padding: 1rem;
 
-  /* Estado inicial (fechado) */
-  transform: translateX(-40rem);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-
-  transition: all 0.4s ease;
-  border-radius: 0 0 5rem 0;
-}
-
-nav a {
-  position: relative;
-  top: 10rem;
-  text-decoration: none;
-  font-family: var(--font-crimson);
-  color: white;
-}
-
-/* Estado ativo (menu aberto) */
-nav.active {
-  max-height: 500px; /* Altura suficiente p/ conteúdo */
-  opacity: 1;
-  transform: translateX(0);
-
-}
-
-/* Controle de camadas */
-.menu-principal {
-  z-index: 13;
-}
-
-.menu-sidebar {
-  z-index: 12;
-}
 
 /* ---------------------- */
 /* CONTEÚDO PRINCIPAL     */
@@ -123,3 +76,29 @@ main {
 section {
   padding-inline: 2rem;
 }
+
+
+/* ---------------------- */
+/* CABEÇALHO (HEADER)     */
+/* ---------------------- */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+header img {
+  width: 4rem;
+}
+
+header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+header button img {
+  width: 2rem;
+}
+/* CABEÇALHO (HEADER)     */

@@ -9,45 +9,8 @@ input {
   width: min-content;
 }
 
-/* ---------------------- */
-/* CABEÇALHO (HEADER)     */
-/* ---------------------- */
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
 
-header img {
-  width: 4rem;
-}
 
-header button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-header button img {
-  width: 2rem;
-}
-
-/* Menu dentro do header */
-header nav {
-  display: grid;
-  background-color: var(--low-gray);
-  max-width: 400px;
-  border-radius: 0 1rem 1rem 0;
-  gap: 1rem;
-  padding: 1rem;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-header nav a {
-  text-decoration: none;
-}
 
 /* ---------------------- */
 /* TÍTULO                 */
@@ -61,23 +24,9 @@ header nav a {
   /* reservado p/ estilização futura */
 }
 
-/* ---------------------- */
-/* MENU PRINCIPAL         */
-/* ---------------------- */
-.menu-principal {
-  position: absolute;
-}
 
-/* ---------------------- */
-/* MENU DE ADICIONAR TASK */
-/* ---------------------- */
-.menu-add-task {
-  max-width: 600px;
-  display: grid;
-  margin: 0 auto;
-  text-align: center;
-  gap: 1rem;
-}
+
+
 
 /* Mensagem de erro */
 .menu-add-task .status-error-menssagem {
@@ -87,26 +36,11 @@ header nav a {
   justify-self: center;
 }
 
-/* Linha de inputs */
-.menu-add-task div {
-  display: flex;
-  gap: 1rem;
-}
 
-/* Inputs */
-.menu-add-task input {
-  width: 100%;
-  height: 4rem;
-  color: #ffffff;
-  border: 2px solid #ffffff30;
-  background-color: var(--low-gray);
-  border-radius: 1rem;
-}
 
-.menu-add-task input:focus {
-  border: 2px solid var(--border-color);
-  outline: none;
-}
+
+
+
 
 /* Textarea */
 .menu-add-task textarea {
@@ -142,31 +76,7 @@ header nav a {
   text-align: end;
 }
 
-/* ---------------------- */
-/* MENU LATERAL (SIDEBAR) */
-/* ---------------------- */
-.menu-side-bar {
-  width: 500px;
-  position: absolute;
 
-  /* Estado inicial (fechado) */
-  transform: translateX(-40rem);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-/* Estado ativo (aberto) */
-.menu-side-bar.active {
-  max-height: 500px;
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* ---------------------- */
-/* SEÇÃO HERO             */
-/* ---------------------- */
 .Hero {
   height: 100dvh;
   padding-inline: 1rem;
