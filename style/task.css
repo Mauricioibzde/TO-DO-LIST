@@ -1,10 +1,13 @@
 /* ===============================
    Lista de tarefas
    =============================== */
-#liste-of-the-aplication {
+
+.liste-of-the-aplication.active
+
+.liste-of-the-aplication {
   margin: 0 auto;
   max-width: 600px;
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   display: grid;
   gap: 1rem;
@@ -16,17 +19,17 @@
   scrollbar-color: #bbb transparent;
 }
 
-#liste-of-the-aplication::-webkit-scrollbar {
+.liste-of-the-aplication::-webkit-scrollbar {
   width: 6px;
 }
-#liste-of-the-aplication::-webkit-scrollbar-track {
+.liste-of-the-aplication::-webkit-scrollbar-track {
   background: transparent;
 }
-#liste-of-the-aplication::-webkit-scrollbar-thumb {
+.liste-of-the-aplication::-webkit-scrollbar-thumb {
   background-color: #bbb;
   border-radius: 4px;
 }
-#liste-of-the-aplication::-webkit-scrollbar-thumb:hover {
+.liste-of-the-aplication::-webkit-scrollbar-thumb:hover {
   background-color: #888;
 }
 
@@ -37,7 +40,7 @@
 /* ===============================
    Itens da lista
    =============================== */
-#liste-of-the-aplication li {
+.liste-of-the-aplication li {
   background-color: var(--low-gray);
   border-radius: 1rem;
   overflow: hidden;
@@ -234,7 +237,9 @@ textarea::placeholder {
     height: 1.5rem;
   }
 
-  #liste-of-the-aplication {
-    max-height: 210px !important;
+  .liste-of-the-aplication {
+    max-height: 200px;
   }
+
+
 }

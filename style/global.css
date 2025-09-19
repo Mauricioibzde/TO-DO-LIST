@@ -6,7 +6,7 @@
 }
 
 body {
-height: 100dvh;
+ height: 100%;
 }
 button{
   font-size: 16px;
@@ -50,12 +50,7 @@ nav {
   z-index: 13;
 }
 
-.all-the-liste {
 
- gap: .7rem;
- max-height: 700px;
- overflow-y: auto;
-}
 
 
 
@@ -68,18 +63,24 @@ nav.active {
 
 
 .Hero {
-  height: 100dvh;
+ height: 100%;
 }
 
-.Hero.active {
 
-}
 
 .Show-all-the-task {
  display: none;
   
 }
 .Show-all-the-task.active {
+  display: grid;
+}
+
+.Show-all-the-task-deleted {
+
+}
+
+.Show-all-the-task-deleted.active {
   display: grid;
 }
 
@@ -118,25 +119,25 @@ input, textarea, select {
 }
 
 
-.height-of-the-all-the-liste {
-  max-height: 490px !important;
-}
+
 
 .Show-all-the-task .task-liste {
   display: grid;
 }
 
 .Hero {
-  display: block;
+  display: none;
+}
+
+.Hero.active {
+  display: grid;
 }
 
 .Show-all-the-task {
   display: none;
 }
 
-.Hero.active {
-  display: none;
-}
+
 
 .Show-all-the-task.active {
   display: grid;

@@ -1,318 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TO-DO LISTE</title>
-    <link rel="stylesheet" href="style/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TO-DO LISTE</title>
+  <link rel="stylesheet" href="style/index.css">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitter:ital,wght@0,100..900;1,100..900&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" 
-      rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitter:ital,wght@0,100..900;1,100..900&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" 
+    rel="stylesheet">
 </head>
 <body>
 
- <header class="menu-principal">
-         <input type="checkbox" id="checkbox">
+  <!-- ✅ MENU PRINCIPAL -->
+  <header class="menu-principal">
+    <input type="checkbox" id="checkbox">
     <label for="checkbox" class="toggle">
-        <div class="bars" id="bar1"></div>
-        <div class="bars" id="bar2"></div>
-        <div class="bars" id="bar3"></div>
+      <div class="bars" id="bar1"></div>
+      <div class="bars" id="bar2"></div>
+      <div class="bars" id="bar3"></div>
     </label>
-    </header>
+  </header>
 
-
-
+  <!-- ✅ SIDEBAR -->
   <nav class="menu-sidebar">
     <div class="menu-content">
-           <div class="btn-add-new-task">
+      <div class="btn-add-new-task">
         <button class="btn-add-task-side-bar">
-          <span><img src="assets/icon/049-pencil.png" alt=""></span> <span>Add new task</span>
+          <span><img src="assets/icon/049-pencil.png" alt=""></span> 
+          <span>Add new task</span>
         </button>
+      </div>
+      <div>
+        <button class="nav-add-task-btn">
+          <span><img src="assets/icon/031-book.png" alt=""></span> 
+          <span>All task</span>
+        </button>
+      </div>
+      <div>
+        <button class="deleted-task">
+          <span><img src="assets/icon/048-trash can.png" alt=""></span> 
+          <span>Deleted tasks</span>
+        </button>
+      </div>
     </div>
-    <div><button class="nav-add-task-btn"><span><img src="assets/icon/031-book.png" alt=""></span> <span>All task</span></button></div>
-    <div>
-         <button class="deleted-task"><span><img src="assets/icon/048-trash can.png" alt=""></span> <span>Deleted tasks</span></button>
-    </div>
-    
-       
   </nav>
-  <section class="Hero">
-  
 
-
-  
+  <!-- ✅ HERO (página inicial / adicionar task) -->
+  <section class="Hero active">
      <header>
-        <img src="assets/icon/016-book.png" alt="">
-         <h1>NAT TODO</h1>
+      <div><img src="assets/icon/016-book.png" alt=""></div>
+      <div><h1>Add a new task</h1></div>
     </header>
    
+    <!-- Formulário para nova task -->
     <div class="menu-add-task">
-        <div>
-            <input class="input-add-task" type="text" placeholder="Add your task!">
-            <div class="input">
-                <input type="date" id="date" name="date" required />
-            </div>
+      <div>
+        <input class="input-add-task" type="text" placeholder="Add your task!">
+        <div class="input">
+          <input type="date" id="date" name="date" required />
         </div>
-       <div class="text-area">
-         <textarea class="add-description" placeholder="Descrição..."></textarea>
-       </div>
-        <button id="btn-add-task">Adicionar</button>
-        <div class="status-error-menssagem">
-            <p>Tarefa adicionada com sucesso!</p>
-        </div>
+      </div>
+      <div class="text-area">
+        <textarea class="add-description" placeholder="Descrição..."></textarea>
+      </div>
+      <button id="btn-add-task">Adicionar</button>
+      <div class="status-error-menssagem">
+        <p>Tarefa adicionada com sucesso!</p>
+      </div>
     </div>
 
+    <!-- Lista de tasks (página principal) -->
     <div class="task-liste">
-        <ul id="liste-of-the-aplication">
-            <!--<li class="status-color-task">
-              
-                <div>
-                    <div class="status-date">
-                        <div class="date">
-                            <span>01/09/2025</span>
-                            <span><img src="assets/icon/Asset 10@2000x.png" alt=""></span>
-                        </div>
-                    </div>
-                </div>
-              
-                <div class="checkbox-status-description">
-                    <input class="checkbox" type="checkbox">
-                    <p>Task</p>
-                    <button class="btn-description">
-                        <img src="assets/icon/011-copywriting.png" alt="">
-                    </button>
-                </div>
-              
-                <div class="open-description display-none">
-                    <div class="show-description">
-                        <p id="description_of_the_task">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                        </p>
-                    </div>
-                </div>
-                <div class="menu-editing-save-delete">
-                    <button>Editar</button>
-                    <button>Salvar</button>
-                    <button>Deletar</button>
-                </div>-->
-            
-        </ul>
+     
     </div>
-
   </section>
 
-
-
-
-   <section class="Show-all-the-task">
-    <header><div>
-        <img src="assets/icon/031-book.png" alt="">
-    </div>
-    <div>
-        <h1> All the Task</h1>
-    </div>
-    
-</header>
+  <!-- ✅ PÁGINA "All tasks" -->
+  <section class="Show-all-the-task">
+    <header>
+      <div><img src="assets/icon/031-book.png" alt=""></div>
+      <div><h1> All the Task</h1></div>
+    </header>
     <div class="task-liste">
-        <ul class="liste-of-the-aplication all-the-liste">
-        <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-          <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-         <li>
-            <div>
-                <div class="status-date">
-                    <div class="date status-yellow"><span>2025-09-18</span><span><img
-                                src="assets/icon/Asset 10@2000x.png"></span></div>
-                </div>
-            </div>
-            <div class="checkbox-status-description status-yellow"><input type="checkbox" class="checkbox">
-                <p></p><button class="btn-description"><img src="assets/icon/023-copywriting.png"></button>
-            </div>
-            <div class="open-description display-none">
-                <div class="show-description status-yellow-dark">
-                    <p></p>
-                </div>
-            </div>
-            <div class="menu-editing-save-delete status-yellow-dark-bottom"><button><img
-                        src="assets/icon/041-notebook.png"></button><button><img src="assets/icon/048-trash can.png"></button>
-            </div>
-        </li>
-        </ul>
+      <ul class="liste-of-the-aplication"></ul>
     </div>
-   </section>
+  </section>
 
-    <script src="script/script.js"></script>
+  <!-- ✅ PÁGINA "Deleted tasks" -->
+  <section class="Show-all-the-task-deleted">
+    <header>
+      <div><img src="assets/icon/048-trash can.png" alt=""></div>
+      <div><h1> All the Task Deleted</h1></div>
+    </header>
+    <div class="task-liste">
+      <ul class="liste-of-the-aplication deleted-task-list"></ul>
+    </div>
+  </section>
+
+  <script src="script/script.js"></script>
 </body>
 </html>

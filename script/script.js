@@ -1,9 +1,10 @@
 // ======================================
-// Seletores globais de inputs
+// Seletores globais
 // ======================================
-const inputAddTask = document.querySelector(".input-add-task"); // Input do título da task
-const inputDate = document.getElementById("date");              // Input de data
-const descriptionOfTask = document.querySelector(".add-description"); // Textarea da descrição
+const inputAddTask = document.querySelector(".input-add-task");       // Input título da task
+const inputDate = document.getElementById("date");                    // Input de data
+const descriptionOfTask = document.querySelector(".add-description"); // Textarea descrição
+const deletedTaskList = document.querySelector(".deleted-task-list"); // UL das tarefas deletadas
 
 // ======================================
 // Função para setar a data atual no input
@@ -15,15 +16,13 @@ function setTodayAsValue() {
   const dd = String(today.getDate()).padStart(2, "0");
 
   const todayStr = `${yyyy}-${mm}-${dd}`;
-
   inputDate.setAttribute("min", todayStr); // Impede datas passadas
-  inputDate.value = todayStr;              // Valor inicial: data de hoje
-  inputDate.setAttribute("placeholder", todayStr); // Placeholder opcional
+  inputDate.value = todayStr;              // Valor inicial = hoje
 }
-setTodayAsValue(); // Executa ao carregar a página
+setTodayAsValue();
 
 // ======================================
-// Função para aplicar status de cores e ícones conforme data
+// Função que define cor/ícone conforme a data
 // ======================================
 function applyTaskStatus(task) {
   const now = new Date();
@@ -35,54 +34,51 @@ function applyTaskStatus(task) {
   const menuDiv = task.querySelector(".menu-editing-save-delete");
   const statusIcon = task.querySelector(".status-date img");
 
-  // Se o input estiver vazio, usar a data atual
+  // Pega data da task
   let inputValue = inputDate.value || `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
   const [yyyy, mm, dd] = inputValue.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
-  dueDate.setHours(0, 0, 0, 0);
 
   const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
 
-  // Remove classes antigas
+  // Reseta classes
   statusDiv.classList.remove("status-red", "status-yellow", "status-green");
   statusDateDiv.classList.remove("status-red", "status-yellow", "status-green");
-  descriptionDiv.classList.remove("status-red-dark", "status-yellow-dark", "status-green-dark");
-  menuDiv.classList.remove("status-red-dark-bottom", "status-yellow-dark-bottom", "status-green-dark-bottom");
 
-  // Aplica cores e troca ícone
+  // Define status visual
   if (diffDays < 0) {
     statusDiv.classList.add("status-red");
     statusDateDiv.classList.add("status-red");
     descriptionDiv.classList.add("status-red-dark");
     menuDiv.classList.add("status-red-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 2@2000x.png";
+    statusIcon.src = "assets/icon/Asset 2@2000x.png"; // atrasada
   } else if (diffDays <= 3) {
     statusDiv.classList.add("status-yellow");
     statusDateDiv.classList.add("status-yellow");
     descriptionDiv.classList.add("status-yellow-dark");
     menuDiv.classList.add("status-yellow-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 10@2000x.png";
+    statusIcon.src = "assets/icon/Asset 10@2000x.png"; // prazo curto
   } else {
     statusDiv.classList.add("status-green");
     statusDateDiv.classList.add("status-green");
     descriptionDiv.classList.add("status-green-dark");
     menuDiv.classList.add("status-green-dark-bottom");
-    statusIcon.src = "assets/icon/Asset 9@2000x.png";
+    statusIcon.src = "assets/icon/Asset 9@2000x.png"; // ok
   }
 }
 
 // ======================================
-// Função para adicionar nova task
+// Adicionar nova task
 // ======================================
 function addTask() {
   const btnAddTask = document.querySelector("#btn-add-task");
 
   btnAddTask.addEventListener("click", () => {
-    const listOfTasks = document.getElementById("liste-of-the-aplication");
+    const listOfTasks = document.querySelector(".liste-of-the-aplication");
     const newTask = document.createElement("li");
 
     // -----------------------------
-    // Status-date
+    // Status + data
     // -----------------------------
     const statusDiv = document.createElement("div");
     const statusDateWrapper = document.createElement("div");
@@ -92,7 +88,6 @@ function addTask() {
     dateDiv.classList.add("date");
 
     const spanDate = document.createElement("span");
-    // Exibe a data atual se o input estiver vazio
     spanDate.textContent = inputDate.value || new Date().toISOString().split("T")[0];
 
     const spanImg = document.createElement("span");
@@ -105,7 +100,7 @@ function addTask() {
     statusDiv.appendChild(statusDateWrapper);
 
     // -----------------------------
-    // Checkbox e título
+    // Checkbox + título + botão descrição
     // -----------------------------
     const checkboxDiv = document.createElement("div");
     checkboxDiv.classList.add("checkbox-status-description");
@@ -141,7 +136,7 @@ function addTask() {
     openDescDiv.appendChild(showDescDiv);
 
     // -----------------------------
-    // Menu de edição (apenas ícones)
+    // Menu de edição (editar/deletar)
     // -----------------------------
     const menuDiv = document.createElement("div");
     menuDiv.classList.add("menu-editing-save-delete");
@@ -159,53 +154,45 @@ function addTask() {
     menuDiv.append(btnEdit, btnDelete);
 
     // -----------------------------
-    // Monta o li completo
+    // Monta o li final
     // -----------------------------
     newTask.append(statusDiv, checkboxDiv, openDescDiv, menuDiv);
     listOfTasks.appendChild(newTask);
 
-    console.log("Nova tarefa adicionada!");
-
-    // Aplica cores e ícones conforme data
+    // Aplica status visual
     applyTaskStatus(newTask);
 
-    // Limpa inputs após adicionar
+    // Limpa inputs
     inputAddTask.value = "";
     descriptionOfTask.value = "";
-    setTodayAsValue(); // Reinsere a data atual no input
+    setTodayAsValue();
   });
 }
 addTask();
 
 // ======================================
-// Função para FECHAR a sidebar
+// Sidebar toggle
 // ======================================
 function closeSidebar() {
   const toggle = document.getElementById("checkbox");
   const openMenu = document.querySelector(".menu-sidebar");
-
-  openMenu.classList.remove("active"); // Esconde sidebar
-  toggle.checked = false;              // Volta o botão principal para posição original
+  openMenu.classList.remove("active");
+  toggle.checked = false;
 }
-
-// ======================================
-// Sidebar toggle
-// ======================================
 function openSideBar() {
   const toggle = document.getElementById("checkbox");
   toggle.addEventListener("change", () => {
     const openMenu = document.querySelector(".menu-sidebar");
     openMenu.classList.toggle("active");
-    console.log("mudou");
   });
 }
 openSideBar();
 
 // ======================================
-// Delegação de eventos global
+// Delegação de eventos (checkbox, descrição, deletar)
 // ======================================
 document.addEventListener("click", (event) => {
-  // ✅ Checkboxes
+  // ✅ Marcar/desmarcar checkbox
   if (event.target.classList.contains("checkbox")) {
     const task = event.target.closest("li");
     const statusDiv = task.querySelector(".checkbox-status-description");
@@ -224,7 +211,7 @@ document.addEventListener("click", (event) => {
     }
   }
 
-  // ✅ Botão descrição
+  // ✅ Botão de descrição → expandir/retrair
   if (event.target.closest(".btn-description")) {
     const task = event.target.closest("li");
     const openDesc = task.querySelector(".open-description");
@@ -234,70 +221,73 @@ document.addEventListener("click", (event) => {
     menuDiv.classList.toggle("active");
   }
 
-  // ✅ Botão excluir
+  // ✅ Botão deletar → mover para lista de deletados
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
     const task = event.target.closest("li");
-    task.remove();
-    console.log("Tarefa excluída!");
+    deletedTaskList.appendChild(task); // move para lista de deletados
+    console.log("Tarefa movida para deletados!");
   }
 });
 
 // ======================================
-// Mostrar todas as tarefas
+// Controle de páginas (Hero, All, Deleted)
 // ======================================
-function showAllTheTask () {
-  let btn_show_all_the_task = document.querySelector(".nav-add-task-btn");
 
+// 🔹 Esconde todas as páginas
+function hideAllPages() {
+  document.querySelector(".Hero").classList.remove("active");
+  document.querySelector(".Show-all-the-task").classList.remove("active");
+  document.querySelector(".Show-all-the-task-deleted").classList.remove("active");
+
+  document.querySelector(".Hero").style.display = "none";
+  document.querySelector(".Show-all-the-task").style.display = "none";
+  document.querySelector(".Show-all-the-task-deleted").style.display = "none";
+}
+
+// 🔹 Mostrar todas as tarefas
+function showAllTheTask() {
+  const btn_show_all_the_task = document.querySelector(".nav-add-task-btn");
   btn_show_all_the_task.addEventListener("click", () => {
-    const heroPage = document.querySelector(".Hero");
+    hideAllPages();
+
     const showAllSection = document.querySelector(".Show-all-the-task");
-    const allTaskOnTheList = document.querySelector(".all-the-liste");
-    const taskList = document.getElementById("liste-of-the-aplication");
-    taskList.classList.toggle("height-of-the-all-the-liste");
+    showAllSection.classList.add("active");
+    showAllSection.style.display = "block";
 
-    // Limpa a UL do "Show-all-the-task"
-    allTaskOnTheList.innerHTML = "";
+    // Clona lista principal para exibir
+   
 
-    // Clona a lista de tarefas (apenas HTML, sem listeners)
-    const clonedList = taskList.cloneNode(true);
-    allTaskOnTheList.appendChild(clonedList);
-
-    // Esconde Hero e mostra AllTasks
-    heroPage.classList.toggle("active");
-    showAllSection.classList.toggle("active");
-
-    console.log("Lista clonada para a seção 'All the Task'");
-
-    // 🔥 Fecha sidebar e reseta botão
     closeSidebar();
   });
 }
 showAllTheTask();
 
-// ======================================
-// Mostrar página Hero
-// ======================================
-function showHeroPage () {
-   const btn_add_task_nav = document.querySelector(".btn-add-task-side-bar");
-   btn_add_task_nav.addEventListener("click",()=>{
-      console.log("Add new task btn");
+// 🔹 Mostrar página Hero (Add new task)
+function showHeroPage() {
+  const btn_add_task_nav = document.querySelector(".btn-add-task-side-bar");
+  btn_add_task_nav.addEventListener("click", () => {
+    hideAllPages();
 
-      // 🔥 Fecha sidebar e reseta botão
-      closeSidebar();
-   });
-} 
+    const hero = document.querySelector(".Hero");
+    hero.classList.add("active");
+    hero.style.display = "grid";
+
+    closeSidebar();
+  });
+}
 showHeroPage();
 
-// ======================================
-// Mostrar página de tarefas deletadas
-// ======================================
-function showDeletedTaksPage () {
-   const btn_show_task_deleted_nav = document.querySelector(".deleted-task");
-   btn_show_task_deleted_nav.addEventListener("click",()=>{
-      console.log("Deleted task btn");
+// 🔹 Mostrar Deleted (tarefas excluídas)
+function showDeletedTaksPage() {
+  const btn_show_task_deleted_nav = document.querySelector(".deleted-task");
+  btn_show_task_deleted_nav.addEventListener("click", () => {
+    hideAllPages();
 
-      // 🔥 Fecha sidebar e reseta botão
-      closeSidebar();
-   });
-} 
+    const deletedSection = document.querySelector(".Show-all-the-task-deleted");
+    deletedSection.classList.add("active");
+    deletedSection.style.display = "block";
+
+    closeSidebar();
+  });
+}
 showDeletedTaksPage();

@@ -84,6 +84,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
+.liste-of-the-aplication {
+    display: grid;
+    gap: 1rem;
+    overflow-y: auto;
+    max-height: max-content;
+}
+
 /* ============================
    Lista de tarefas */
 #liste-of-the-aplication {

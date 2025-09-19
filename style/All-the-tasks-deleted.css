@@ -1,7 +1,7 @@
-.Show-all-the-task {
-  height: 100dvh;
+.Show-all-the-task-deleted {
+     height: 100dvh;
   padding-inline: 1rem;
-  padding-bottom: 2rem;
+  display: none;
 
   & header {
   display: grid;
@@ -28,18 +28,6 @@
     justify-content: center;
     align-items: center;
    }
-
-
-    & h1 {
-        
-    }
-      & img {
-      
-    }
-  }
 }
 
-
-.Show-all-the-task.active {
-    height: max-content;
 }
