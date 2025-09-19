@@ -5,8 +5,7 @@ const inputAddTask = document.querySelector(".input-add-task"); // Input título
 const inputDate = document.getElementById("date");              // Input data
 const descriptionOfTask = document.querySelector(".add-description"); // Textarea descrição
 const deletedTaskList = document.querySelector(".deleted-task-list"); // Lista de tasks deletadas
-const doneTaskList = document.querySelector(".list-task-done");
-; // Lista de tasks concluídas
+const doneTaskList = document.querySelector(".list-task-done"); // Lista de tasks concluídas
 const successMessage = document.getElementById("success-message"); // Mensagem de status
 
 // ======================================
@@ -68,12 +67,19 @@ function applyTaskStatus(task) {
 }
 
 // ======================================
-// Adicionar nova task
+// Adicionar nova task (com validação)
 // ======================================
 function addTask() {
   const btnAddTask = document.querySelector("#btn-add-task");
 
   btnAddTask.addEventListener("click", () => {
+
+    // Validação: título e data não podem estar vazios
+    if (inputAddTask.value.trim() === "" || inputDate.value.trim() === "") {
+      alert("⚠️ Please fill in all required fields (title and date).");
+      return; // Interrompe a função
+    }
+
     const listOfTasks = document.querySelector(".liste-of-the-aplication");
     const newTask = document.createElement("li");
 
@@ -88,7 +94,7 @@ function addTask() {
     dateDiv.classList.add("date");
 
     const spanDate = document.createElement("span");
-    spanDate.textContent = inputDate.value || new Date().toISOString().split("T")[0];
+    spanDate.textContent = inputDate.value;
 
     const spanImg = document.createElement("span");
     const img = document.createElement("img");
@@ -100,7 +106,7 @@ function addTask() {
     statusDiv.appendChild(statusDateWrapper);
 
     // --------------------------
-    // Checkbox + título + descrição
+    // Checkbox + título + botão descrição
     // --------------------------
     const checkboxDiv = document.createElement("div");
     checkboxDiv.classList.add("checkbox-status-description");
@@ -191,34 +197,38 @@ function openSideBar() {
 openSideBar();
 
 // ======================================
-// Delegação de eventos (checkbox, descrição, deletar)
+// Delegação de eventos (checkbox, descrição, deletar) com confirmação
 // ======================================
 document.addEventListener("click", (event) => {
   const task = event.target.closest("li");
-
   if (!task) return;
 
   // --------------------------
-  // Marcar/desmarcar checkbox → move para "done"
+  // Checkbox → marcar/desmarcar com confirmação
   // --------------------------
   if (event.target.classList.contains("checkbox")) {
     const statusDiv = task.querySelector(".checkbox-status-description");
     const statusDateDiv = task.querySelector(".date");
     const statusIcon = task.querySelector(".status-date img");
 
+    if (!statusDiv.classList.contains("background-list-checked")) {
+      const confirmDone = confirm("Tem certeza que deseja marcar esta tarefa como concluída?");
+      if (!confirmDone) {
+        event.target.checked = false;
+        return; // Cancela a ação
+      }
+    }
+
     statusDiv.classList.toggle("background-list-checked");
     statusDateDiv.classList.toggle("background-list-checked");
 
     if (statusDiv.classList.contains("background-list-checked")) {
       statusIcon.src = "assets/icon/Asset 4@2000x.png";
-
-      // Move para lista de tasks concluídas
       doneTaskList.appendChild(task);
       statusMenssagen("Task marked as done!");
     } else {
-      // Retorna para lista principal
       document.querySelector(".liste-of-the-aplication").appendChild(task);
-      applyTaskStatus(task); // Reaplica cores/status
+      applyTaskStatus(task);
       statusMenssagen("Task unmarked!");
     }
   }
@@ -234,9 +244,12 @@ document.addEventListener("click", (event) => {
   }
 
   // --------------------------
-  // Deletar task
+  // Deletar task com confirmação
   // --------------------------
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
+    const confirmDelete = confirm("Tem certeza que deseja excluir esta tarefa?");
+    if (!confirmDelete) return;
+
     if (task.parentElement.classList.contains("liste-of-the-aplication") ||
         task.parentElement.classList.contains("liste-of-the-aplication-task-done")) {
       task.parentElement.removeChild(task);

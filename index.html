@@ -12,6 +12,8 @@
   <link 
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitter:ital,wght@0,100..900;1,100..900&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" 
     rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitter&family=Crimson+Pro&family=Inter&family=Merriweather&family=Open+Sans&family=Playfair+Display&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -40,6 +42,12 @@
           <span>All task</span>
         </button>
       </div>
+       <div>
+        <button class="task-done">
+          <span><img src="assets/icon/040-smm.png" alt=""></span> 
+          <span>Tasks done</span>
+        </button>
+      </div>
       <div>
         <button class="deleted-task">
           <span><img src="assets/icon/048-trash can.png" alt=""></span> 
@@ -47,12 +55,7 @@
         </button>
       </div>
 
-       <div>
-        <button class="task-done">
-          <span><img src="assets/icon/040-smm.png" alt=""></span> 
-          <span>Tasks done</span>
-        </button>
-      </div>
+
     </div>
   </nav>
 
@@ -67,19 +70,28 @@
     <div class="menu-add-task">
       <div>
         <input class="input-add-task" type="text" placeholder="Add your task!">
-        <div class="input">
-          <input type="date" id="date" name="date" required />
-        </div>
+        
+          <input class="input-data" type="date" id="date" name="date" required />
+        
       </div>
       <div class="text-area">
         <textarea class="add-description" placeholder="Description..."></textarea>
       </div>
-      <div class="btn-add-task-hero" id="btn-add-task"><p>Add Task</p></div>
+      <div class="btn-add-task-hero" id="btn-add-task">Add Task</div>
       
       <div class="status-error-menssagem">
         <p id="success-message"></p>
       </div>
     </div>
+
+        <footer class="footer">
+  <p>
+    Criado por <strong>Mauricio Farias da Silva</strong> © 
+    <span id="year"></span>
+  </p>
+  <p class="extra-info">Organize suas tarefas com estilo 🚀</p>
+ 
+</footer>
 
     <!-- Lista de tasks (página principal) -->
   </section>
@@ -117,6 +129,8 @@
       <ul class="liste-of-the-aplication list-task-done"></ul>
     </div>
   </section>
+
+
 
 
 

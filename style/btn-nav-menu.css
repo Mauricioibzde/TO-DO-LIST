@@ -83,13 +83,16 @@
     margin: 0 auto;
     width: 10rem;
     height: 3rem;
-    border-radius: 1rem;
+    border: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
-    color:black ;
+    background-color: #db4b86;
+    color:rgb(255, 255, 255) ;
     cursor: pointer;
+    font-family: var(--font-inter);
+    font-weight: 700;
+    border-radius: 1rem;
  }
 
 

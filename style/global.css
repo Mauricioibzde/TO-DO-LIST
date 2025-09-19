@@ -7,13 +7,20 @@
   box-sizing: border-box;
 }
 
+
+body {
+  background: var(--background-gradiente);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+
 button {
   cursor: pointer;
 }
 
-body {
-  height: 100%;
-}
+
 
 button {
   font-size: 16px; /* Tamanho mínimo para acessibilidade */
@@ -21,6 +28,10 @@ button {
 
 li {
   list-style: none;
+
+  & p {
+    font-family: var(--font-opensans);
+  }
 }
 
 input,
@@ -28,10 +39,16 @@ textarea,
 select {
   width: 100%;
   font-size: 16px; /* Evita zoom no iOS */
+
+}
+
+input {
+ text-align: center;
+ height: 4rem;
 }
 
 p {
-  font-family: var(--font-crimson);
+  
 }
 
 h1 {
@@ -102,3 +119,6 @@ header button img {
   width: 2rem;
 }
 /* CABEÇALHO (HEADER)     */
+
+
+

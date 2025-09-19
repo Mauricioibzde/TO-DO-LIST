@@ -43,11 +43,7 @@
  
 }
 
-/* ============================
-   General */
-body {
-    background: var(--background-gradiente-js);
-}
+
 
 main {
     height: 100dvh;

@@ -1,13 +1,8 @@
 /* ---------------------- */
 /* ELEMENTOS GERAIS       */
 /* ---------------------- */
-body {
-  background-color: var(--background-color);
-}
 
-input {
-  width: min-content;
-}
+
 
 
 
@@ -29,11 +24,14 @@ input {
 
 
 /* Mensagem de erro */
-.menu-add-task .status-error-menssagem {
+ .status-error-menssagem {
   height: 3rem;
   color: white;
-  font-family: var(--font-bitter);
-  justify-self: center;
+  
+   & {
+    justify-self: center;
+   font-family: var(--font-opensans);
+   }
 }
 
 
@@ -51,6 +49,7 @@ input {
   border: 2px solid #ffffff30;
   resize: none;
   color: #ffffff;
+  grid-column: span 2/3;
 }
 
 .menu-add-task textarea:focus {
@@ -58,28 +57,13 @@ input {
   outline: none;
 }
 
-/* Botão */
-.menu-add-task button {
-  margin: 0 auto;
-  width: 8rem;
-  height: 3rem;
-  border-radius: 1rem;
-  border: none;
-  cursor: pointer;
-}
 
-/* Campo de data */
-#date {
-  width: 10rem;
-  height: 4rem;
-  padding-inline: 1rem;
-  text-align: end;
-}
 
 
 .Hero {
   height: 100dvh;
   padding-inline: 1rem;
+  grid-template-rows: max-content;
 }
 
 /* Header dentro da Hero */
