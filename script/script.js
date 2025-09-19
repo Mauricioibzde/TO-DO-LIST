@@ -190,34 +190,7 @@ function openSideBar() {
 }
 openSideBar()
 
-// ======================================
-// Mostrar todas as tarefas
-// ======================================
-function showAllTheTask () {
-  let btn_show_all_the_task = document.getElementById("nav-add-task-btn");
 
-  btn_show_all_the_task.addEventListener("click", () => {
-    const heroPage = document.querySelector(".Hero");
-    const showAllSection = document.querySelector(".Show-all-the-task");
-    const allTaskOnTheList = document.querySelector(".all-the-liste");
-    const taskList = document.getElementById("liste-of-the-aplication");
-    taskList.classList.toggle("height-of-the-all-the-liste")
-
-    // Limpa a UL do "Show-all-the-task"
-    allTaskOnTheList.innerHTML = "";
-
-    // Clona a lista de tarefas (apenas HTML, sem listeners)
-    const clonedList = taskList.cloneNode(true);
-    allTaskOnTheList.appendChild(clonedList);
-
-    // Esconde Hero e mostra AllTasks
-    heroPage.classList.toggle("active");
-    showAllSection.classList.toggle("active");
-
-    console.log("Lista clonada para a seção 'All the Task'");
-  });
-}
-showAllTheTask();
 
 // ======================================
 // Delegação de eventos global
@@ -259,3 +232,54 @@ document.addEventListener("click", (event) => {
     console.log("Tarefa excluída!");
   }
 });
+
+
+
+// ======================================
+// Mostrar todas as tarefas
+// ======================================
+function showAllTheTask () {
+  let btn_show_all_the_task = document.getElementById("nav-add-task-btn");
+
+  btn_show_all_the_task.addEventListener("click", () => {
+    const heroPage = document.querySelector(".Hero");
+    const showAllSection = document.querySelector(".Show-all-the-task");
+    const allTaskOnTheList = document.querySelector(".all-the-liste");
+    const taskList = document.getElementById("liste-of-the-aplication");
+    taskList.classList.toggle("height-of-the-all-the-liste")
+
+    // Limpa a UL do "Show-all-the-task"
+    allTaskOnTheList.innerHTML = "";
+
+    // Clona a lista de tarefas (apenas HTML, sem listeners)
+    const clonedList = taskList.cloneNode(true);
+    allTaskOnTheList.appendChild(clonedList);
+
+    // Esconde Hero e mostra AllTasks
+    heroPage.classList.toggle("active");
+    showAllSection.classList.toggle("active");
+
+    console.log("Lista clonada para a seção 'All the Task'");
+  });
+}
+showAllTheTask();
+
+function showHeroPage () {
+   const btn_add_task_nav = document.querySelector(".btn-add-task-side-bar")
+   btn_add_task_nav.addEventListener("click",()=>{
+      console.log("Add new task btn")
+   })
+} 
+
+showHeroPage ()
+
+
+
+function showDeletedTaksPage () {
+   const btn_show_task_deleted_nav = document.querySelector(".deleted-task")
+   btn_show_task_deleted_nav.addEventListener("click",()=>{
+      console.log("Deleted task btn")
+   })
+} 
+
+showDeletedTaksPage ()
