@@ -1,6 +1,6 @@
 .Show-all-the-task-deleted {
      height: 100dvh;
-  padding-inline: 1rem;
+  padding-inline: 8rem;
   display: none;
 
   & header {

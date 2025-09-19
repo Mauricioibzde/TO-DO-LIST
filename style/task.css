@@ -2,17 +2,23 @@
    Lista de tarefas
    =============================== */
 
+   .task-liste {
+    display: none;
+     border: solid 1px white;
+   }
+
 .liste-of-the-aplication.active
 
 .liste-of-the-aplication {
   margin: 0 auto;
   max-width: 600px;
-  max-height: 300px;
+  max-height: 495px;
   overflow-y: auto;
   display: grid;
   gap: 1rem;
   padding-right: 0.5rem;
-  scrollbar-gutter: stable both-edges;
+   border-radius: 1rem;
+ 
 
   /* Scroll minimalista */
   scrollbar-width: thin;          /* Firefox */
