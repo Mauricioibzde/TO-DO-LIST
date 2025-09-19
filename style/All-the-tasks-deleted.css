@@ -1,10 +1,11 @@
 .Show-all-the-task-deleted {
      height: 100dvh;
-  padding-inline: 8rem;
+  
   display: none;
 
   & header {
   display: grid;
+  min-width: 18rem;
  
   justify-content: center;
   align-items: center;

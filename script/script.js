@@ -35,6 +35,7 @@ function applyTaskStatus(task) {
   const menuDiv = task.querySelector(".menu-editing-save-delete");
   const statusIcon = task.querySelector(".status-date img");
 
+  // Pega data do input ou hoje, se vazio
   let inputValue = inputDate.value || `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
   const [yyyy, mm, dd] = inputValue.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
@@ -158,7 +159,7 @@ function addTask() {
     setTodayAsValue();
 
     // Mensagem de sucesso
-    statusMenssagen();
+    statusMenssagen("Task added successfully! Add another task!");
   });
 }
 addTask();
@@ -219,6 +220,9 @@ document.addEventListener("click", (event) => {
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
     const task = event.target.closest("li");
     deletedTaskList.appendChild(task); // move para lista de deletados
+
+    // Mensagem de feedback ao excluir
+    statusMenssagen("Task moved to Deleted Tasks!");
   }
 });
 
@@ -257,11 +261,11 @@ document.querySelector(".nav-add-task-btn").addEventListener("click", () => show
 document.querySelector(".deleted-task").addEventListener("click", () => showPage(".Show-all-the-task-deleted"));
 
 // ======================================
-// Mensagem de status
+// Mensagem de status (centralizada)
 // ======================================
-function statusMenssagen() {
+function statusMenssagen(message) {
   const originalText = "Add a task!";
-  successMessage.textContent = "Task added successfully! Add another task!";
+  successMessage.textContent = message;
   setTimeout(() => {
     successMessage.textContent = originalText;
   }, 3000);

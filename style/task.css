@@ -247,5 +247,10 @@ textarea::placeholder {
     max-height: 200px;
   }
 
+  .Show-all-the-task-deleted {
+     
+  padding-inline: 1rem;
+ }
+
 
 }
