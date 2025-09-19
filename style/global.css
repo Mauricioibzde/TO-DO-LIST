@@ -119,7 +119,7 @@ input, textarea, select {
 }
 
 .Show-all-the-task .task-liste {
-  d
+  display: grid;
 }
 
 .Hero {
