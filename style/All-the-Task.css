@@ -1,6 +1,6 @@
 .Show-all-the-task {
   min-height: 100dvh;
-  padding-inline: 1rem;
+ 
   padding-bottom: 2rem;
  
 
@@ -43,4 +43,32 @@
 
 .Show-all-the-task.active {
     height: max-content;
+}
+
+
+.Show-all-the-task {
+  display: none;
+}
+
+.Show-all-the-task.active {
+  display: grid;
+}
+
+.Show-all-the-task .task-liste {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  max-height: 510px;
+  overflow-y: auto;
+  border-radius: 1rem;
+  
+}
+
+/* Lista de tarefas excluídas */
+.Show-all-the-task-deleted {
+  display: none;
+}
+
+.Show-all-the-task-deleted.active {
+  display: grid;
 }

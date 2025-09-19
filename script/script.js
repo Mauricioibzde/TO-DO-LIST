@@ -5,7 +5,8 @@ const inputAddTask = document.querySelector(".input-add-task"); // Input título
 const inputDate = document.getElementById("date");              // Input data
 const descriptionOfTask = document.querySelector(".add-description"); // Textarea descrição
 const deletedTaskList = document.querySelector(".deleted-task-list"); // Lista de tasks deletadas
-const doneTaskList = document.querySelector(".liste-of-the-aplication-task-done"); // Lista de tasks concluídas
+const doneTaskList = document.querySelector(".list-task-done");
+; // Lista de tasks concluídas
 const successMessage = document.getElementById("success-message"); // Mensagem de status
 
 // ======================================

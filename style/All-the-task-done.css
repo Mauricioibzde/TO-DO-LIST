@@ -1,8 +1,13 @@
 .Show-all-the-task-done {
   min-height: 100dvh;
-  padding-inline: 1rem;
+
   padding-bottom: 2rem;
   display: none;
+
+
+  & li {
+    border-radius: 1rem;
+  }
  
 
  & header {
