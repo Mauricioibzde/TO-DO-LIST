@@ -1,11 +1,12 @@
 // ======================================
 // Seletores globais
 // ======================================
-const inputAddTask = document.querySelector(".input-add-task");       // Input título da task
-const inputDate = document.getElementById("date");                    // Input de data
-const descriptionOfTask = document.querySelector(".add-description"); // Textarea descrição
-const deletedTaskList = document.querySelector(".deleted-task-list"); // UL das tarefas deletadas
-const successMessage = document.getElementById("success-message");    // Mensagem de sucesso
+const inputAddTask = document.querySelector(".input-add-task");
+const inputDate = document.getElementById("date");
+const descriptionOfTask = document.querySelector(".add-description");
+const deletedTaskList = document.querySelector(".deleted-task-list");
+const doneTaskList = document.querySelector(".liste-of-the-aplication-task-done");
+const successMessage = document.getElementById("success-message");
 
 // ======================================
 // Função para setar a data atual no input
@@ -15,8 +16,8 @@ function setTodayAsValue() {
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, "0");
   const dd = String(today.getDate()).padStart(2, "0");
-
   const todayStr = `${yyyy}-${mm}-${dd}`;
+
   inputDate.setAttribute("min", todayStr);
   inputDate.value = todayStr;
 }
@@ -26,9 +27,7 @@ setTodayAsValue();
 // Função que define cor/ícone conforme a data
 // ======================================
 function applyTaskStatus(task) {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
+  const today = new Date();
   const statusDiv = task.querySelector(".checkbox-status-description");
   const statusDateDiv = task.querySelector(".date");
   const descriptionDiv = task.querySelector(".show-description");
@@ -39,7 +38,7 @@ function applyTaskStatus(task) {
   const [yyyy, mm, dd] = inputValue.split("-");
   const dueDate = new Date(yyyy, mm - 1, dd);
 
-  const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+  const diffDays = Math.ceil((dueDate - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / (1000 * 60 * 60 * 24));
 
   statusDiv.classList.remove("status-red", "status-yellow", "status-green");
   statusDateDiv.classList.remove("status-red", "status-yellow", "status-green");
@@ -182,9 +181,10 @@ openSideBar();
 // Delegação de eventos
 // ======================================
 document.addEventListener("click", (event) => {
-  // Checkbox
+  const task = event.target.closest("li");
+
+  // Marcar/desmarcar checkbox → move para "done" se marcado
   if (event.target.classList.contains("checkbox")) {
-    const task = event.target.closest("li");
     const statusDiv = task.querySelector(".checkbox-status-description");
     const statusDateDiv = task.querySelector(".date");
     const statusIcon = task.querySelector(".status-date img");
@@ -194,16 +194,20 @@ document.addEventListener("click", (event) => {
 
     if (statusDiv.classList.contains("background-list-checked")) {
       statusIcon.src = "assets/icon/Asset 4@2000x.png";
+
+      // Mover task concluída para a lista de done
+      doneTaskList.appendChild(task);
+      statusMenssagen("Task marked as done!");
     } else {
-      if (statusDiv.classList.contains("status-red")) statusIcon.src = "assets/icon/Asset 2@2000x.png";
-      else if (statusDiv.classList.contains("status-yellow")) statusIcon.src = "assets/icon/Asset 10@2000x.png";
-      else statusIcon.src = "assets/icon/Asset 9@2000x.png";
+      // Retorna para a lista principal se desmarcada
+      document.querySelector(".liste-of-the-aplication").appendChild(task);
+      applyTaskStatus(task); // Reaplica cor/status
+      statusMenssagen("Task unmarked!");
     }
   }
 
-  // Expandir descrição
+  // Expandir/retrair descrição
   if (event.target.closest(".btn-description")) {
-    const task = event.target.closest("li");
     const openDesc = task.querySelector(".open-description");
     const menuDiv = task.querySelector(".menu-editing-save-delete");
 
@@ -213,16 +217,12 @@ document.addEventListener("click", (event) => {
 
   // Deletar task
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
-    const task = event.target.closest("li");
-
-    // Remove da lista principal, se estiver nela
-    if (task.parentElement.classList.contains("liste-of-the-aplication")) {
+    if (task.parentElement.classList.contains("liste-of-the-aplication") ||
+        task.parentElement.classList.contains("liste-of-the-aplication-task-done")) {
       task.parentElement.removeChild(task);
     }
 
-    // Move para deletados
     deletedTaskList.appendChild(task);
-
     statusMenssagen("Task moved to Deleted Tasks!");
   }
 });
@@ -231,7 +231,7 @@ document.addEventListener("click", (event) => {
 // Controle de páginas
 // ======================================
 function showPage(selector) {
-  document.querySelectorAll(".Hero, .Show-all-the-task, .Show-all-the-task-deleted")
+  document.querySelectorAll(".Hero, .Show-all-the-task, .Show-all-the-task-deleted, .Show-all-the-task-done")
     .forEach(page => {
       page.style.display = "none";
       page.classList.remove("active");
