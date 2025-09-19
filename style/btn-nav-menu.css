@@ -1,4 +1,7 @@
-
+/* CSS: aumenta o tamanho do botão ou input para evitar zoom automático */
+#btn-add-task {
+  font-size: 16px; /* mínimo 16px para não disparar zoom em iOS/Android */
+}
 
 .btn-add-new-task,  .btn-add-task-side-bar ,  .deleted-task , .nav-add-task-btn {
    border-radius: 1rem;
