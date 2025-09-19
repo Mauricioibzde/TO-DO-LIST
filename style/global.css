@@ -119,7 +119,7 @@ input, textarea, select {
 }
 
 .Show-all-the-task .task-liste {
-  padding-block: 5rem;
+  d
 }
 
 .Hero {
@@ -135,6 +135,6 @@ input, textarea, select {
 }
 
 .Show-all-the-task.active {
-  display: block;
+  display: grid;
 }
 
