@@ -7,7 +7,6 @@ const descriptionOfTask = document.querySelector(".add-description"); // Textare
 const deletedTaskList = document.querySelector(".deleted-task-list"); // UL das tarefas deletadas
 const successMessage = document.getElementById("success-message");    // Mensagem de sucesso
 
-
 // ======================================
 // Função para setar a data atual no input
 // ======================================
@@ -78,9 +77,7 @@ function addTask() {
     const listOfTasks = document.querySelector(".liste-of-the-aplication");
     const newTask = document.createElement("li");
 
-    // -----------------------------
     // Status + data
-    // -----------------------------
     const statusDiv = document.createElement("div");
     const statusDateWrapper = document.createElement("div");
     statusDateWrapper.classList.add("status-date");
@@ -100,9 +97,7 @@ function addTask() {
     statusDateWrapper.appendChild(dateDiv);
     statusDiv.appendChild(statusDateWrapper);
 
-    // -----------------------------
     // Checkbox + título + botão descrição
-    // -----------------------------
     const checkboxDiv = document.createElement("div");
     checkboxDiv.classList.add("checkbox-status-description");
 
@@ -121,9 +116,7 @@ function addTask() {
 
     checkboxDiv.append(checkboxInput, pTitle, btnDescription);
 
-    // -----------------------------
     // Descrição
-    // -----------------------------
     const openDescDiv = document.createElement("div");
     openDescDiv.classList.add("open-description", "display-none");
 
@@ -136,9 +129,7 @@ function addTask() {
     showDescDiv.appendChild(pDesc);
     openDescDiv.appendChild(showDescDiv);
 
-    // -----------------------------
     // Menu de edição (editar/deletar)
-    // -----------------------------
     const menuDiv = document.createElement("div");
     menuDiv.classList.add("menu-editing-save-delete");
 
@@ -154,34 +145,20 @@ function addTask() {
 
     menuDiv.append(btnEdit, btnDelete);
 
-    // -----------------------------
     // Monta o li final
-    // -----------------------------
     newTask.append(statusDiv, checkboxDiv, openDescDiv, menuDiv);
     listOfTasks.appendChild(newTask);
 
     // Aplica status visual
     applyTaskStatus(newTask);
 
-    // =============================
-    // Mensagem de sucesso
-    // =============================
-    // Mostra a mensagem
-  
-
-    // Reinicia timeout caso o usuário adicione várias tarefas rapidamente
-
-
-    // =============================
     // Limpa inputs
-    // =============================
     inputAddTask.value = "";
     descriptionOfTask.value = "";
     setTodayAsValue();
 
-
-
-    statusMenssagen()
+    // Mensagem de sucesso
+    statusMenssagen();
   });
 }
 addTask();
@@ -191,10 +168,11 @@ addTask();
 // ======================================
 function closeSidebar() {
   const toggle = document.getElementById("checkbox");
+  toggle.checked = false;
   const openMenu = document.querySelector(".menu-sidebar");
   openMenu.classList.remove("active");
-  toggle.checked = false;
 }
+
 function openSideBar() {
   const toggle = document.getElementById("checkbox");
   toggle.addEventListener("change", () => {
@@ -208,7 +186,7 @@ openSideBar();
 // Delegação de eventos (checkbox, descrição, deletar)
 // ======================================
 document.addEventListener("click", (event) => {
-  // ✅ Marcar/desmarcar checkbox
+  // Marcar/desmarcar checkbox
   if (event.target.classList.contains("checkbox")) {
     const task = event.target.closest("li");
     const statusDiv = task.querySelector(".checkbox-status-description");
@@ -227,7 +205,7 @@ document.addEventListener("click", (event) => {
     }
   }
 
-  // ✅ Botão de descrição → expandir/retrair
+  // Botão de descrição → expandir/retrair
   if (event.target.closest(".btn-description")) {
     const task = event.target.closest("li");
     const openDesc = task.querySelector(".open-description");
@@ -237,96 +215,54 @@ document.addEventListener("click", (event) => {
     menuDiv.classList.toggle("active");
   }
 
-  // ✅ Botão deletar → mover para lista de deletados
+  // Botão deletar → mover para lista de deletados
   if (event.target.closest(".menu-editing-save-delete button img[src*='trash']")) {
     const task = event.target.closest("li");
     deletedTaskList.appendChild(task); // move para lista de deletados
-    console.log("Tarefa movida para deletados!");
   }
 });
 
 // ======================================
-// Controle de páginas (Hero, All, Deleted)
+// Controle de páginas centralizado
 // ======================================
+function showPage(selector) {
+  // Esconde todas as páginas
+  document.querySelectorAll(".Hero, .Show-all-the-task, .Show-all-the-task-deleted")
+          .forEach(page => {
+            page.style.display = "none";
+            page.classList.remove("active");
+          });
 
-// 🔹 Esconde todas as páginas
-function hideAllPages() {
-  document.querySelector(".Hero").classList.remove("active");
-  document.querySelector(".Show-all-the-task").classList.remove("active");
-  document.querySelector(".Show-all-the-task-deleted").classList.remove("active");
+  // Mostra a página selecionada
+  const page = document.querySelector(selector);
+  page.style.display = selector === ".Hero" ? "grid" : "block";
+  page.classList.add("active");
 
-  document.querySelector(".Hero").style.display = "none";
-  document.querySelector(".Show-all-the-task").style.display = "none";
-  document.querySelector(".Show-all-the-task-deleted").style.display = "none";
-}
+  // Fecha a sidebar
+  closeSidebar();
 
-// 🔹 Mostrar todas as tarefas
-function showAllTheTask() {
-  const btn_show_all_the_task = document.querySelector(".nav-add-task-btn");
-  btn_show_all_the_task.addEventListener("click", () => {
-    hideAllPages();
-
-    const showAllSection = document.querySelector(".Show-all-the-task");
-    showAllSection.classList.add("active");
-    showAllSection.style.display = "block";
-
-    // Clona lista principal para exibir
+  // Se for página "All tasks", clona lista principal
+  if (selector === ".Show-all-the-task") {
     const taskList = document.querySelector(".liste-of-the-aplication");
     const allTaskOnTheList = document.querySelector(".all-the-liste");
     allTaskOnTheList.innerHTML = "";
     const clonedList = taskList.cloneNode(true);
     allTaskOnTheList.appendChild(clonedList);
-
-    closeSidebar();
-  });
+  }
 }
-showAllTheTask();
 
-// 🔹 Mostrar página Hero (Add new task)
-function showHeroPage() {
-  const btn_add_task_nav = document.querySelector(".btn-add-task-side-bar");
-  btn_add_task_nav.addEventListener("click", () => {
-    hideAllPages();
+// Eventos dos botões da sidebar
+document.querySelector(".btn-add-task-side-bar").addEventListener("click", () => showPage(".Hero"));
+document.querySelector(".nav-add-task-btn").addEventListener("click", () => showPage(".Show-all-the-task"));
+document.querySelector(".deleted-task").addEventListener("click", () => showPage(".Show-all-the-task-deleted"));
 
-    const hero = document.querySelector(".Hero");
-    hero.classList.add("active");
-    hero.style.display = "grid";
-
-    closeSidebar();
-  });
-}
-showHeroPage();
-
-// 🔹 Mostrar Deleted (tarefas excluídas)
-function showDeletedTaksPage() {
-  const btn_show_task_deleted_nav = document.querySelector(".deleted-task");
-  btn_show_task_deleted_nav.addEventListener("click", () => {
-    hideAllPages();
-
-    const deletedSection = document.querySelector(".Show-all-the-task-deleted");
-    deletedSection.classList.add("active");
-    deletedSection.style.display = "block";
-
-    closeSidebar();
-  });
-}
-showDeletedTaksPage();
-
-
-
-
+// ======================================
+// Mensagem de status
+// ======================================
 function statusMenssagen() {
-  // Texto original da mensagem
- const originalText = "Add a task!";
-
-
-  // Mostra a mensagem de sucesso
+  const originalText = "Add a task!";
   successMessage.textContent = "Task added successfully! Add another task!";
-
-
-  // Depois de 3 segundos, volta para o texto original
   setTimeout(() => {
     successMessage.textContent = originalText;
-   
   }, 3000);
 }
