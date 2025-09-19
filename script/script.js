@@ -178,19 +178,28 @@ function addTask() {
 addTask();
 
 // ======================================
+// Função para FECHAR a sidebar
+// ======================================
+function closeSidebar() {
+  const toggle = document.getElementById("checkbox");
+  const openMenu = document.querySelector(".menu-sidebar");
+
+  openMenu.classList.remove("active"); // Esconde sidebar
+  toggle.checked = false;              // Volta o botão principal para posição original
+}
+
+// ======================================
 // Sidebar toggle
 // ======================================
 function openSideBar() {
-  const toogle = document.getElementById("checkbox")
-  toogle.addEventListener("change",()=>{
-    const openMenu = document.querySelector(".menu-sidebar")
-    openMenu.classList.toggle("active")
-    console.log("mudou")
-  })
+  const toggle = document.getElementById("checkbox");
+  toggle.addEventListener("change", () => {
+    const openMenu = document.querySelector(".menu-sidebar");
+    openMenu.classList.toggle("active");
+    console.log("mudou");
+  });
 }
-openSideBar()
-
-
+openSideBar();
 
 // ======================================
 // Delegação de eventos global
@@ -233,8 +242,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-
-
 // ======================================
 // Mostrar todas as tarefas
 // ======================================
@@ -246,7 +253,7 @@ function showAllTheTask () {
     const showAllSection = document.querySelector(".Show-all-the-task");
     const allTaskOnTheList = document.querySelector(".all-the-liste");
     const taskList = document.getElementById("liste-of-the-aplication");
-    taskList.classList.toggle("height-of-the-all-the-liste")
+    taskList.classList.toggle("height-of-the-all-the-liste");
 
     // Limpa a UL do "Show-all-the-task"
     allTaskOnTheList.innerHTML = "";
@@ -260,26 +267,37 @@ function showAllTheTask () {
     showAllSection.classList.toggle("active");
 
     console.log("Lista clonada para a seção 'All the Task'");
+
+    // 🔥 Fecha sidebar e reseta botão
+    closeSidebar();
   });
 }
 showAllTheTask();
 
+// ======================================
+// Mostrar página Hero
+// ======================================
 function showHeroPage () {
-   const btn_add_task_nav = document.querySelector(".btn-add-task-side-bar")
+   const btn_add_task_nav = document.querySelector(".btn-add-task-side-bar");
    btn_add_task_nav.addEventListener("click",()=>{
-      console.log("Add new task btn")
-   })
+      console.log("Add new task btn");
+
+      // 🔥 Fecha sidebar e reseta botão
+      closeSidebar();
+   });
 } 
+showHeroPage();
 
-showHeroPage ()
-
-
-
+// ======================================
+// Mostrar página de tarefas deletadas
+// ======================================
 function showDeletedTaksPage () {
-   const btn_show_task_deleted_nav = document.querySelector(".deleted-task")
+   const btn_show_task_deleted_nav = document.querySelector(".deleted-task");
    btn_show_task_deleted_nav.addEventListener("click",()=>{
-      console.log("Deleted task btn")
-   })
-} 
+      console.log("Deleted task btn");
 
-showDeletedTaksPage ()
+      // 🔥 Fecha sidebar e reseta botão
+      closeSidebar();
+   });
+} 
+showDeletedTaksPage();
