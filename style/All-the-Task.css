@@ -1,6 +1,36 @@
 .Show-all-the-task {
   height: 100dvh;
   padding-inline: 1rem;
+
+  & header {
+  display: grid;
+ 
+  justify-content: center;
+  align-items: center;
+   gap: 1rem;
+   height: 10rem;
+
+   & div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   }
+
+     & div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+
+    & h1 {
+        
+    }
+      & img {
+      
+    }
+  }
 }
 
 

@@ -1,0 +1,62 @@
+
+
+  .btn-add-task-side-bar ,  .deleted-task , .nav-add-task-btn {
+   border-radius: 1rem;
+}
+
+
+
+
+
+
+
+.btn-add-task-side-bar{
+  
+        display: flex;
+         justify-content: flex-start;
+        align-items: center;
+        gap: .5rem;
+        width: 10rem;
+        height: 3rem;
+      
+        padding-inline: .5rem;
+
+        & img {
+            width: 1.5rem;
+            transform: rotate(315deg);
+        }
+}
+
+ .nav-add-task-btn  {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: .5rem;
+        width: 10rem;
+        height: 3rem;
+       
+        padding-inline: .5rem;
+
+        & img {
+            width: 1.5rem;
+            
+        }
+ }
+
+  .deleted-task  {
+     width: 10rem;
+        height: 3rem;
+        display: flex;
+         justify-content: flex-start;
+        align-items: center;
+         gap: .5rem;
+        
+         padding-inline: .5rem;
+
+          & img {
+            width: 1.5rem;
+            
+        }
+ }
+
+

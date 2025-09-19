@@ -246,7 +246,7 @@ document.addEventListener("click", (event) => {
 // Mostrar todas as tarefas
 // ======================================
 function showAllTheTask () {
-  let btn_show_all_the_task = document.getElementById("nav-add-task-btn");
+  let btn_show_all_the_task = document.querySelector(".nav-add-task-btn");
 
   btn_show_all_the_task.addEventListener("click", () => {
     const heroPage = document.querySelector(".Hero");

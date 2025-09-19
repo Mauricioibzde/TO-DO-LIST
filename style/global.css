@@ -43,7 +43,7 @@ nav {
 }
 
 .menu-principal {
-  z-index: 2;
+  z-index: 13;
 }
 
 .all-the-liste {
@@ -136,5 +136,9 @@ input, textarea, select {
 
 .Show-all-the-task.active {
   display: grid;
+}
+
+.menu-sidebar {
+  z-index: 12;
 }
 
