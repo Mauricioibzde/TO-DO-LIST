@@ -7,22 +7,14 @@
   box-sizing: border-box;
 }
 
-
 body {
   background: var(--background-gradiente);
   max-width: 900px;
   margin: 0 auto;
 }
 
-
-
 button {
   cursor: pointer;
-}
-
-
-
-button {
   font-size: 16px; /* Tamanho mínimo para acessibilidade */
 }
 
@@ -34,31 +26,55 @@ li {
   }
 }
 
-
 .textarea,
 select {
   width: 100%;
   font-size: 16px; /* Evita zoom no iOS */
-
 }
-.input-add-task, .input-data {
+
+.input-add-task,
+.input-data {
   min-width: 10rem;
   max-width: 12rem;
-  min-height: 3rem;
-   max-height: 3rem;
+  max-height: 3rem;
+   min-height: 3rem;
 }
 
 .add-description {
   width: 100%;
 }
 
+/* ---------------------- */
+/* AJUSTES PARA INPUTS NO SAFARI */
+/* ---------------------- */
 input {
- text-align: center;
- height: 4rem;
+  text-align: center;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 16px; /* Evita zoom no iOS */
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0; /* Safari arredonda por padrão */
 }
 
+/* Remove botões nativos de incremento/decremento */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ajusta o ícone do calendário no Safari */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+}
+
+/* ---------------------- */
+/* TIPOGRAFIA             */
+/* ---------------------- */
 p {
-  
 }
 
 h1 {
@@ -66,8 +82,6 @@ h1 {
   color: white;
   text-align: center;
 }
-
-
 
 /* ---------------------- */
 /* CONTEÚDO PRINCIPAL     */
@@ -99,11 +113,9 @@ main {
   gap: 1rem;
 }
 
-
 section {
   padding-inline: 2rem;
 }
-
 
 /* ---------------------- */
 /* CABEÇALHO (HEADER)     */
@@ -129,6 +141,3 @@ header button img {
   width: 2rem;
 }
 /* CABEÇALHO (HEADER)     */
-
-
-
