@@ -118,6 +118,8 @@
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
+  background-color: white;
+  border-radius: 1rem;
 }
 
 .checkbox-status-description .btn-description {
