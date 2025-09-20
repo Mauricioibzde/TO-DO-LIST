@@ -36,7 +36,7 @@ li {
 
 input,
 textarea,
-select {
+select {min-width: 100%;
   width: 100%;
   font-size: 16px; /* Evita zoom no iOS */
 
