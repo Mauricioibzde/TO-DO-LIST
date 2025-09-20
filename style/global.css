@@ -34,15 +34,20 @@ li {
   }
 }
 
-input,
-textarea,
+
+.textarea,
 select {
   width: 100%;
   font-size: 16px; /* Evita zoom no iOS */
 
 }
 .input-add-task, .input-data {
-  min-width: 100%;
+  min-width: 10rem;
+  max-width: 12rem;
+}
+
+.add-description {
+  width: 100%;
 }
 
 input {
